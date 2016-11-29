@@ -10,8 +10,8 @@ public class PlayerMovement : MonoBehaviour
 	float camRayLength = 100f;
 
 	void Awake(){
-		//floorMask = LayerMask.GetMask ("Floor");
-		//anim = GetComponent<Animator> ();
+		floorMask = LayerMask.GetMask ("Floor");
+		anim = GetComponent<Animator> ();
 		playerRigidbody = GetComponent<Rigidbody> ();
 
 	}
