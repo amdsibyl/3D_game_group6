@@ -3,6 +3,7 @@ using System.Collections;
 using UnityEngine.UI;
 
 public class EnergyManagerScript : MonoBehaviour {
+	public static float div;
 	public float maxEnergy;
 	public float energy;
 	public int speedLevel;
@@ -61,7 +62,7 @@ public class EnergyManagerScript : MonoBehaviour {
 
 		if (UpdateFlag == true) {
 			energy = Mathf.Pow (Time.time - startTime, 2) * speedLevel;
-			float div = energy / maxEnergy;
+			div = energy / maxEnergy;
 
 			if (div >= 0.4 && nowBlock==0) {
 				TextManager.steps = 1;
