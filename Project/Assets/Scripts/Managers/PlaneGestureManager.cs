@@ -12,6 +12,7 @@ public class PlaneGestureManager : MonoBehaviour {
 	public Rigidbody Player;
 
 	void Start () {
+		/*
 		singleTap.Tapped += (object sender, System.EventArgs e) => {
 			TouchHit hit;
 			singleTap.GetTargetHitResult (out hit);
@@ -23,6 +24,7 @@ public class PlaneGestureManager : MonoBehaviour {
 			Player.transform.DOLocalMoveZ (targetPoint.z, 1f);
 
 		};
+		/*
 
 
 		/*
