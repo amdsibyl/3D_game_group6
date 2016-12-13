@@ -5,13 +5,14 @@ using UnityEngine.UI;
 public class EnergyManagerScript : MonoBehaviour {
 	public float maxEnergy;
 	public float energy;
-	public int speedLevel = 10;
+	public int speedLevel;
 
 	private float startTime;
 	private bool UpdateFlag = false;
 
 	public Image bar;
 	private float level;
+	private int nowBlock = 0;
 
 	// Use this for initialization
 	void Start () {
@@ -20,7 +21,19 @@ public class EnergyManagerScript : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		
+		/*For Computer*/
+		if (Input.GetMouseButtonDown (0)) {
+			startTime = Time.time;
+			energy = 0;
+			nowBlock = 0;
+			TextManager.steps = 0;
+			UpdateFlag = true;
+		} else if (Input.GetMouseButtonUp (0)) {
+			UpdateFlag = false;		
+		}
 
+		/*For Mobile*/
 		if (Input.touchCount > 0) {
 			Touch touch = Input.GetTouch (0);
 
@@ -28,8 +41,10 @@ public class EnergyManagerScript : MonoBehaviour {
 			switch (touch.phase) {
 			// Record initial touch position.
 			case TouchPhase.Began:
-				//startPos = touch.position;
 				startTime = Time.time;
+				energy = 0;
+				nowBlock = 0;
+				TextManager.steps = 0;
 				UpdateFlag = true;
 				break;
 
@@ -39,26 +54,37 @@ public class EnergyManagerScript : MonoBehaviour {
 
 				// Report that a direction has been chosen when the finger is lifted.
 			case TouchPhase.Ended:
-
 				UpdateFlag = false;
 				break;
 			}
-			if (UpdateFlag == true) {
-				 
-				energy = Mathf.Pow (Time.time - startTime, 2) * speedLevel;
-
-				if (energy / maxEnergy >= 1.1) {
-					startTime = Time.time;
-					energy = 0;
-				}
-				level = energy / maxEnergy;
-				bar.fillAmount = level * 0.5f;
-
-			}
 		}
 
-	//	level = energy / maxEnergy;
-	//	bar.fillAmount = level * 0.5f;
+		if (UpdateFlag == true) {
+			energy = Mathf.Pow (Time.time - startTime, 2) * speedLevel;
+			float div = energy / maxEnergy;
+
+			if (div >= 0.4 && nowBlock==0) {
+				TextManager.steps = 1;
+				nowBlock ++;
+			} else if (div >= 0.7 && nowBlock==1) {
+				TextManager.steps = 2;
+				nowBlock ++;
+			} else if (div >= 0.9 && nowBlock==2) {
+				TextManager.steps = 3;
+				nowBlock ++;
+			}
+
+			if (div >= 1.1) {
+				startTime = Time.time;
+				energy = 0;
+				nowBlock = 0;
+				TextManager.steps = 0;
+			}
+
+			level = energy / maxEnergy;
+			bar.fillAmount = level * 0.5f;
+		}
+
 	}
 
 
