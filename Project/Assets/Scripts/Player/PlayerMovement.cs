@@ -1,11 +1,19 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
+using System.Collections;
+//using TouchScript.Gestures;
+//using TouchScript.Hit;
+using DG.Tweening;
 
 public class PlayerMovement : MonoBehaviour
 {
 	public float speed = 6f;
+	public int mode = 0;
+	bool MoveFlag = false;
 	Vector3 movement;
-//	Animator anim;
 	Rigidbody playerRigidbody;
+//	float radius;
+//	Animator anim;
 //	int floorMask;
 //	float camRayLength = 100f;
 
@@ -13,8 +21,66 @@ public class PlayerMovement : MonoBehaviour
 //		floorMask = LayerMask.GetMask ("Floor");
 //		anim = GetComponent<Animator> ();
 		playerRigidbody = GetComponent<Rigidbody> ();
+		TextManager.mode = mode;
+//		radius = GetComponent<SphereCollider> ().radius;
 	}
 
+	void Update(){
+		if (EnergyManagerScript.UpdateFlag == true) {
+			MoveFlag = true;
+		} else if (MoveFlag == true) {
+			playerRigidbody.velocity = new Vector3 (0, 9.8f * 1f / 2.0f, 0);
+
+			if (TextManager.mode == 0) {
+				//number of steps
+
+				switch(TextManager.nowDirection){
+
+				case 0: //forward
+					playerRigidbody.transform.DOLocalMoveZ (playerRigidbody.transform.position.z + TextManager.data * 2f, 2f);
+					break;
+
+				case 1: //right
+					playerRigidbody.transform.DOLocalMoveX (playerRigidbody.transform.position.x + TextManager.data * 2f, 2f);
+					break;
+
+				case 2: //back
+					playerRigidbody.transform.DOLocalMoveZ (playerRigidbody.transform.position.z - TextManager.data * 2f, 2f);
+					break;
+
+				case 3: //left
+					playerRigidbody.transform.DOLocalMoveX (playerRigidbody.transform.position.x - TextManager.data * 2f, 2f);
+					break;
+				}
+
+			} 
+			else {
+				//change direction
+				switch(TextManager.nowDirection){
+					case 0: //forward
+						playerRigidbody.transform.DOLocalMoveZ (playerRigidbody.transform.position.z + 2f , 2f);
+						break;
+
+					case 1: //right
+						playerRigidbody.transform.DOLocalMoveX (playerRigidbody.transform.position.x + 2f, 2f);
+						break;
+
+					case 2: //back
+						playerRigidbody.transform.DOLocalMoveZ (playerRigidbody.transform.position.z - 2f , 2f);
+						break;
+
+					case 3: //left
+						playerRigidbody.transform.DOLocalMoveX (playerRigidbody.transform.position.x - 2f, 2f);
+						break;
+				}
+			
+			}
+
+			MoveFlag = false;
+		}
+	}
+		
+/*
 	void FixedUpdate(){
 		float h = Input.GetAxisRaw ("Horizontal");
 		float v = Input.GetAxisRaw ("Vertical");
@@ -31,7 +97,7 @@ public class PlayerMovement : MonoBehaviour
 		//playerRigidbody.AddForce(Vector3.up * jumpSpeed);
 		playerRigidbody.MovePosition (transform.position + movement);
 	}
-/*
+
 	void Turning(){
 		Ray camRay = Camera.main.ScreenPointToRay (Input.mousePosition);
 		RaycastHit floorHit;
@@ -44,8 +110,6 @@ public class PlayerMovement : MonoBehaviour
 		}
 			
 	}
-*/
-/*
 	void Animating(float h,float v){
 		bool walking = h!=0f || v!=0f;
 		anim.SetBool ("IsWalking", walking);
