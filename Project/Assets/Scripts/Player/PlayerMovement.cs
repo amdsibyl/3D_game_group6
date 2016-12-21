@@ -29,7 +29,7 @@ public class PlayerMovement : MonoBehaviour
 		if (EnergyManagerScript.UpdateFlag == true) {
 			MoveFlag = true;
 		} else if (MoveFlag == true) {
-			playerRigidbody.velocity = new Vector3 (0, 9.8f * 1f / 2.0f, 0);
+			playerRigidbody.velocity = new Vector3 (0, 9.8f * 0.9f / 2.0f, 0);
 
 			if (TextManager.mode == 0) {
 				//number of steps
