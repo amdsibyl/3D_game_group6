@@ -65,16 +65,10 @@ public class EnergyManagerScript : MonoBehaviour {
 			energy = Mathf.Pow (Time.time - startTime, 2) * speedLevel;
 			div = energy / maxEnergy;
 
-			if (div >= 0.4 && nowBlock == 0) {
-				TextManager.data = 1;
-				nowBlock++;
-			} else if (div >= 0.7 && nowBlock == 1) {
-				TextManager.data = 2;
-				nowBlock++;
-			} else if (div >= 0.9 && nowBlock == 2) {
-				TextManager.data = 3;
+			if ( (div >= 0.4 && nowBlock == 0) || (div >= 0.7 && nowBlock == 1) || (div >= 0.9 && nowBlock == 2) ) {
 				nowBlock++;
 			}
+			TextManager.data = nowBlock;
 
 			if (div >= 1.1) {
 				startTime = Time.time;
