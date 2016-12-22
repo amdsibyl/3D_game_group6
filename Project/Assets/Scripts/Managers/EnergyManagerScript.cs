@@ -20,16 +20,21 @@ public class EnergyManagerScript : MonoBehaviour {
 
 	void Start () {
 		nowBlock = -1;
+		energy = 0;
+		bar.fillAmount = 0f;
 	}
 
+	void Reset (){
+		startTime = Time.time;
+		energy = 0;
+		nowBlock = 0;
+		PlayerMovement.data = 0;
+	}
 	void Update () {
 		
 		/*For Computer*/
 		if (Input.GetMouseButtonDown (0)) {
-			startTime = Time.time;
-			energy = 0;
-			nowBlock = 0;
-			TextManager.data = 0;
+			Reset();
 			UpdateFlag = true;
 		} else if (Input.GetMouseButtonUp (0)) {
 			UpdateFlag = false;		
@@ -43,10 +48,7 @@ public class EnergyManagerScript : MonoBehaviour {
 			switch (touch.phase) {
 			// Record initial touch position.
 			case TouchPhase.Began:
-				startTime = Time.time;
-				energy = 0;
-				nowBlock = 0;
-				TextManager.data = 0;
+				Reset ();
 				UpdateFlag = true;
 				break;
 
@@ -65,16 +67,13 @@ public class EnergyManagerScript : MonoBehaviour {
 			energy = Mathf.Pow (Time.time - startTime, 2) * speedLevel;
 			div = energy / maxEnergy;
 
-			if ( (div >= 0.4 && nowBlock == 0) || (div >= 0.7 && nowBlock == 1) || (div >= 0.9 && nowBlock == 2) ) {
+			if ((div >= 0.4 && nowBlock == 0) || (div >= 0.7 && nowBlock == 1) || (div >= 0.9 && nowBlock == 2)) {
 				nowBlock++;
 			}
-			TextManager.data = nowBlock;
+			PlayerMovement.data = nowBlock;
 
 			if (div >= 1.1) {
-				startTime = Time.time;
-				energy = 0;
-				nowBlock = 0;
-				TextManager.data = 0;
+				Reset ();
 			}
 
 			level = energy / maxEnergy;
@@ -82,9 +81,7 @@ public class EnergyManagerScript : MonoBehaviour {
 			Done = true;
 
 		} else if (Done == true) {
-			nowBlock = -1;
-			energy = 0;
-			bar.fillAmount = 0f;
+			Start ();
 		}
 
 	}
