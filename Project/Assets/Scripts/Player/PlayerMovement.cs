@@ -26,8 +26,10 @@ public class PlayerMovement : MonoBehaviour
 	}
 
 	void Update(){
+		
 		if (EnergyManagerScript.UpdateFlag == true) {
 			MoveFlag = true;
+			//OnCollisionEnter();
 		} else if (MoveFlag == true) {
 			playerRigidbody.velocity = new Vector3 (0, 9.8f * 0.9f / 2.0f, 0);
 
@@ -78,8 +80,37 @@ public class PlayerMovement : MonoBehaviour
 
 			MoveFlag = false;
 		}
+
+
+	}//end  of Update()
+/*		
+	void OnCollisionEnter (Collision collision)
+	{
+		if (collision.gameObject.tag == "green_right")
+		{
+			Debug.Log("green_right");
+		}
+		else if (collision.gameObject.tag == "green_down")
+		{
+			Debug.Log("green_down");
+		}
+		else if (collision.gameObject.tag == "green_left")
+		{
+			Debug.Log("green_left");
+		}
+		else if (collision.gameObject.tag == "green_up")
+		{
+			Debug.Log("green_up");
+		}
+
+
+		else if (collision.gameObject.tag == "GREEN")
+		{
+			Debug.Log("green");
+		}
 	}
-		
+*/
+
 /*
 	void FixedUpdate(){
 		float h = Input.GetAxisRaw ("Horizontal");

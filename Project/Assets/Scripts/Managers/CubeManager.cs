@@ -4,17 +4,22 @@ using UnityEngine;
 
 public class CubeManager : MonoBehaviour {
 	public ParticleSystem particlesystem;
-	// Use this for initialization
 	void Start () {
 		
 	}
-	
-	// Update is called once per frame
 	void Update () {
 		
 	}
 
 	void OnCollisionEnter(Collision collision){
 		particlesystem.Play ();
+
+/*		if (collision.gameObject.tag == "Player")
+		{
+			Debug.Log("player");
+		}
+*/
 	}
+
+
 }
