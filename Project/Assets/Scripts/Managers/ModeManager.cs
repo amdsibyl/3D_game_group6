@@ -7,11 +7,6 @@ public class ModeManager : MonoBehaviour {
 	public int NowLevel = 1;
 	public GameObject[] Level;
 	public Vector3[] startCoordinate;
-	/*
-	public GameObject Level01;
-	public GameObject Level02;
-	public GameObject Level03;
-	*/
 
 	void Start () {
 		player = GetComponent<Rigidbody> ();

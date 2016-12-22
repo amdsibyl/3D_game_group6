@@ -8,8 +8,10 @@ using DG.Tweening;
 public class PlayerMovement : MonoBehaviour
 {
 	public float speed = 6f;
-	public int mode = 0;
+	public int mode = 1;
 	bool MoveFlag = false;
+	bool CollisionFlag = false;
+	int[] CollisionTmp = new int[3];
 	Vector3 movement;
 	Rigidbody playerRigidbody;
 //	float radius;
@@ -26,7 +28,7 @@ public class PlayerMovement : MonoBehaviour
 	}
 
 	void Update(){
-		
+
 		if (EnergyManagerScript.UpdateFlag == true) {
 			MoveFlag = true;
 			//OnCollisionEnter();
@@ -37,7 +39,6 @@ public class PlayerMovement : MonoBehaviour
 				//number of steps
 
 				switch(TextManager.nowDirection){
-
 				case 0: //forward
 					playerRigidbody.transform.DOLocalMoveZ (playerRigidbody.transform.position.z + TextManager.data * 2f, 2f);
 					break;
@@ -57,6 +58,7 @@ public class PlayerMovement : MonoBehaviour
 
 			} 
 			else {
+
 				//change direction
 				switch(TextManager.nowDirection){
 					case 0: //forward
@@ -75,41 +77,64 @@ public class PlayerMovement : MonoBehaviour
 						playerRigidbody.transform.DOLocalMoveX (playerRigidbody.transform.position.x - 2f, 2f);
 						break;
 				}
-			
-			}
 
+			}//end of else
+
+			if (CollisionFlag == true) {
+				TextManager.mode = 1;
+				TextManager.data = CollisionTmp [1];
+				TextManager.nowDirection = CollisionTmp [2];
+				CollisionFlag = false;
+			}
 			MoveFlag = false;
+			//mode = TextManager.mode;
 		}
 
+	}//end of Update()
 
-	}//end  of Update()
-/*		
+	void Record(int i,int j,int k){
+		CollisionTmp [0] = i;	
+		CollisionTmp [1] = j;
+		CollisionTmp [2] = k;
+	}
+
 	void OnCollisionEnter (Collision collision)
 	{
-		if (collision.gameObject.tag == "green_right")
-		{
-			Debug.Log("green_right");
-		}
-		else if (collision.gameObject.tag == "green_down")
-		{
-			Debug.Log("green_down");
-		}
-		else if (collision.gameObject.tag == "green_left")
-		{
-			Debug.Log("green_left");
-		}
-		else if (collision.gameObject.tag == "green_up")
-		{
-			Debug.Log("green_up");
+		if (collision.gameObject.tag == "green_up") {
+			Debug.Log ("green_up");
+			Record (TextManager.mode, TextManager.data, TextManager.nowDirection);
+			TextManager.mode = 0;
+			TextManager.data = 0;
+			TextManager.nowDirection = 0;
+			CollisionFlag = true;
+		} 	
+		else if (collision.gameObject.tag == "green_right") {
+			Debug.Log ("green_right");
+			Record (TextManager.mode, TextManager.data, TextManager.nowDirection);
+			TextManager.mode = 0;
+			TextManager.data = 1;
+			TextManager.nowDirection = 1;
+			CollisionFlag = true;
+		} 
+		else if (collision.gameObject.tag == "green_down") {
+			Debug.Log ("green_down");
+			Record (TextManager.mode, TextManager.data, TextManager.nowDirection);
+			TextManager.mode = 0;
+			TextManager.data = 2;
+			TextManager.nowDirection = 2;
+			CollisionFlag = true;
+		} 
+		else if (collision.gameObject.tag == "green_left") {
+			Debug.Log ("green_left");
+			Record (TextManager.mode, TextManager.data, TextManager.nowDirection);
+			TextManager.mode = 0;
+			TextManager.data = 3;
+			TextManager.nowDirection = 3;
+			CollisionFlag = true;
 		}
 
-
-		else if (collision.gameObject.tag == "GREEN")
-		{
-			Debug.Log("green");
-		}
 	}
-*/
+
 
 /*
 	void FixedUpdate(){

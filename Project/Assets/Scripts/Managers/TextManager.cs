@@ -30,28 +30,25 @@ public class TextManager : MonoBehaviour {
 				switch (data) {
 				case 0:
 					text.text = "↑";
-					nowDirection = 0;
 					break;
 
 				case 1:
 					text.text = "→";
-					nowDirection = 1;
 					break;
 
 				case 2:
 					text.text = "↓";
-					nowDirection = 2;
 					break;
 
 				case 3:
 					text.text = "←";
-					nowDirection = 3;
 					break;
 
 				default:
 					text.text = "Press!";
 					break;
 				}
+				nowDirection = data;
 			}
 		}
 		else if (EnergyManagerScript.Done == true) {
