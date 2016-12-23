@@ -43,22 +43,22 @@ public class PlayerMovement : MonoBehaviour
 
 				case 0: //forward
 					//playerRigidbody.transform.DOMoveZ (playerRigidbody.transform.position.z + data * 2f, 2f);
-					playerRigidbody.transform.DOJump(playerRigidbody.transform.position + movementZ, 1, 1, 0.5F, false);
+					playerRigidbody.transform.DOJump(playerRigidbody.transform.position + movementZ, 1, 1, 1.2f, false);
 					break;
 
 				case 1: //right
 					//playerRigidbody.transform.DOMoveX (playerRigidbody.transform.position.x + data * 2f, 2f);
-					playerRigidbody.transform.DOJump(playerRigidbody.transform.position + movementX, 1, 1, 0.5F, false);
+					playerRigidbody.transform.DOJump(playerRigidbody.transform.position + movementX, 1, 1, 1.2f, false);
 					break;
 
 				case 2: //back
 					//playerRigidbody.transform.DOMoveZ (playerRigidbody.transform.position.z - data * 2f, 2f);
-					playerRigidbody.transform.DOJump(playerRigidbody.transform.position - movementZ, 1, 1, 0.5F, false);
+					playerRigidbody.transform.DOJump(playerRigidbody.transform.position - movementZ, 1, 1, 1.2f, false);
 					break;
 
 				case 3: //left
 					//playerRigidbody.transform.DOMoveX (playerRigidbody.transform.position.x - data * 2f, 2f);
-					playerRigidbody.transform.DOJump(playerRigidbody.transform.position - movementX, 1, 1, 0.5F, false);
+					playerRigidbody.transform.DOJump(playerRigidbody.transform.position - movementX, 1, 1, 1.2f, false);
 					break;
 				}
 
@@ -79,22 +79,22 @@ public class PlayerMovement : MonoBehaviour
 					
 					case 0: //forward
 						//playerRigidbody.transform.DOLocalMoveZ (playerRigidbody.transform.position.z + 2f , 2f);
-						playerRigidbody.transform.DOJump(playerRigidbody.transform.position + movementZ, 1, 1, 0.7F, false);	
-					break;
+						playerRigidbody.transform.DOJump(playerRigidbody.transform.position + movementZ, 1, 1, 1.2f, false);	
+						break;
 
 					case 1: //right
 						//playerRigidbody.transform.DOLocalMoveX (playerRigidbody.transform.position.x + 2f , 2f);
-						playerRigidbody.transform.DOJump(playerRigidbody.transform.position + movementX, 1, 1, 0.7F, false);
+						playerRigidbody.transform.DOJump(playerRigidbody.transform.position + movementX, 1, 1, 1.2f, false);
 						break;
 
 					case 2: //back
 						//playerRigidbody.transform.DOLocalMoveZ (playerRigidbody.transform.position.z - 2f , 2f);
-						playerRigidbody.transform.DOJump(playerRigidbody.transform.position - movementZ, 1, 1, 0.7F, false);
+						playerRigidbody.transform.DOJump(playerRigidbody.transform.position - movementZ, 1, 1, 1.2f, false);
 						break;
 
 					case 3: //left
 						//playerRigidbody.transform.DOLocalMoveX (playerRigidbody.transform.position.x - 2f, 2f);
-						playerRigidbody.transform.DOJump(playerRigidbody.transform.position - movementX, 1, 1, 0.7F, false);
+						playerRigidbody.transform.DOJump(playerRigidbody.transform.position - movementX, 1, 1, 1.2f, false);
 						break;
 
 					default:
