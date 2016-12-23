@@ -14,11 +14,12 @@ public class PlayerMovement : MonoBehaviour
 	public static int nowDirection = 0;
 
 	public float speed = 30f;
-	//bool MoveFlag = false;
 	bool CollisionFlag = false;
 	int[] CollisionTmp = new int[2];
 	Vector3 movement;
 	Rigidbody playerRigidbody;
+	Vector3 movementX;
+	Vector3 movementZ;
 
 	void Awake(){
 		playerRigidbody = GetComponent<Rigidbody> ();
@@ -34,22 +35,30 @@ public class PlayerMovement : MonoBehaviour
 			if (mode == 0) {
 				//Debug.Log ("mode0:"+data);
 
+				movementX = new Vector3(data * 2f,0,0);
+				movementZ = new Vector3(0,0,data * 2f);
+
 				//number of steps
 				switch(nowDirection){
+
 				case 0: //forward
-					playerRigidbody.transform.DOMoveZ (playerRigidbody.transform.position.z + data * 2f, 2f);
+					//playerRigidbody.transform.DOMoveZ (playerRigidbody.transform.position.z + data * 2f, 2f);
+					playerRigidbody.transform.DOJump(playerRigidbody.transform.position + movementZ, 1, 1, 0.5F, false);
 					break;
 
 				case 1: //right
-					playerRigidbody.transform.DOMoveX (playerRigidbody.transform.position.x + data * 2f, 2f);
+					//playerRigidbody.transform.DOMoveX (playerRigidbody.transform.position.x + data * 2f, 2f);
+					playerRigidbody.transform.DOJump(playerRigidbody.transform.position + movementX, 1, 1, 0.5F, false);
 					break;
 
 				case 2: //back
-					playerRigidbody.transform.DOMoveZ (playerRigidbody.transform.position.z - data * 2f, 2f);
+					//playerRigidbody.transform.DOMoveZ (playerRigidbody.transform.position.z - data * 2f, 2f);
+					playerRigidbody.transform.DOJump(playerRigidbody.transform.position - movementZ, 1, 1, 0.5F, false);
 					break;
 
 				case 3: //left
-					playerRigidbody.transform.DOMoveX (playerRigidbody.transform.position.x - data * 2f, 2f);
+					//playerRigidbody.transform.DOMoveX (playerRigidbody.transform.position.x - data * 2f, 2f);
+					playerRigidbody.transform.DOJump(playerRigidbody.transform.position - movementX, 1, 1, 0.5F, false);
 					break;
 				}
 
@@ -62,24 +71,30 @@ public class PlayerMovement : MonoBehaviour
 			} 
 			else {
 				//Debug.Log ("mode1:"+data);
+				movementX = new Vector3(2f,0,0);
+				movementZ = new Vector3(0,0,2f);
 
 				//change direction
 				switch(data){
-
+					
 					case 0: //forward
-						playerRigidbody.transform.DOLocalMoveZ (playerRigidbody.transform.position.z + 2f , 2f);
-						break;
+						//playerRigidbody.transform.DOLocalMoveZ (playerRigidbody.transform.position.z + 2f , 2f);
+						playerRigidbody.transform.DOJump(playerRigidbody.transform.position + movementZ, 1, 1, 0.7F, false);	
+					break;
 
 					case 1: //right
-						playerRigidbody.transform.DOLocalMoveX (playerRigidbody.transform.position.x + 2f , 2f);
+						//playerRigidbody.transform.DOLocalMoveX (playerRigidbody.transform.position.x + 2f , 2f);
+						playerRigidbody.transform.DOJump(playerRigidbody.transform.position + movementX, 1, 1, 0.7F, false);
 						break;
 
 					case 2: //back
-						playerRigidbody.transform.DOLocalMoveZ (playerRigidbody.transform.position.z - 2f , 2f);
+						//playerRigidbody.transform.DOLocalMoveZ (playerRigidbody.transform.position.z - 2f , 2f);
+						playerRigidbody.transform.DOJump(playerRigidbody.transform.position - movementZ, 1, 1, 0.7F, false);
 						break;
 
 					case 3: //left
-						playerRigidbody.transform.DOLocalMoveX (playerRigidbody.transform.position.x - 2f, 2f);
+						//playerRigidbody.transform.DOLocalMoveX (playerRigidbody.transform.position.x - 2f, 2f);
+						playerRigidbody.transform.DOJump(playerRigidbody.transform.position - movementX, 1, 1, 0.7F, false);
 						break;
 
 					default:
