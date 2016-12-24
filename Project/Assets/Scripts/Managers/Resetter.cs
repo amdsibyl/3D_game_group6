@@ -3,7 +3,7 @@ using UnityEngine.SceneManagement;
 using System.Collections;
 
 public class Resetter : MonoBehaviour {
-    public Rigidbody projectile;
+    public Rigidbody rigidbody;
     public float resetSpeed = 0.025f;
 
 	void Start () {
@@ -15,11 +15,11 @@ public class Resetter : MonoBehaviour {
 	}
 
     void OnTriggerExit(Collider other) {
-        if (other.GetComponent<Rigidbody>() == projectile)
+		if (other.GetComponent<Rigidbody>() == rigidbody)
             Reset();
 
     }
-    void Reset() {
+   	void Reset() {
         //Application.LoadLevel(Application.loadedLevel);
         SceneManager.LoadScene("Proj01");
     }

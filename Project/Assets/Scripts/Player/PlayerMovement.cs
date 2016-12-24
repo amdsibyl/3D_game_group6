@@ -15,11 +15,12 @@ public class PlayerMovement : MonoBehaviour
 
 	public float speed = 30f;
 	bool CollisionFlag = false;
-	int[] CollisionTmp = new int[2];
 	Vector3 movement;
 	Rigidbody playerRigidbody;
 	Vector3 movementX;
 	Vector3 movementZ;
+
+	public static bool LevelUpFlag = false;
 
 	void Awake(){
 		playerRigidbody = GetComponent<Rigidbody> ();
@@ -118,24 +119,28 @@ public class PlayerMovement : MonoBehaviour
 			mode = 0;
 			nowDirection = 0;
 			CollisionFlag = true;
-		} 	
-		else if (collision.gameObject.tag == "green_right") {
+		} else if (collision.gameObject.tag == "green_right") {
 			//Debug.Log ("green_right");
 			mode = 0;
 			nowDirection = 1;
 			CollisionFlag = true;
-		} 
-		else if (collision.gameObject.tag == "green_down") {
+		} else if (collision.gameObject.tag == "green_down") {
 			//Debug.Log ("green_down");
 			mode = 0;
 			nowDirection = 2;
 			CollisionFlag = true;
-		} 
-		else if (collision.gameObject.tag == "green_left") {
+		} else if (collision.gameObject.tag == "green_left") {
 			//Debug.Log ("green_left");
 			mode = 0;
 			nowDirection = 3;
 			CollisionFlag = true;
+		} else if (collision.gameObject.tag == "EndDiamond") {
+			Debug.Log ("EndDiamond");
+			//Destroy (GetComponent<GameObject> ());
+			//LevelUpFlag = true;
+		} else if (collision.gameObject.tag == "End") {
+			Debug.Log ("End");
+			LevelUpFlag = true;
 		}
 
 	}//end of OnCollisionEnter()
