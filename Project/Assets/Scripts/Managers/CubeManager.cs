@@ -7,18 +7,18 @@ public class CubeManager : MonoBehaviour {
 	void Start () {
 		
 	}
+
 	void Update () {
 		
 	}
 
 	void OnCollisionEnter(Collision collision){
-		particlesystem.Play ();
 
-/*		if (collision.gameObject.tag == "Player")
+		if (collision.gameObject.tag == "Player")
 		{
-			Debug.Log("player");
+			particlesystem.Play ();
 		}
-*/
+
 	}
 
 

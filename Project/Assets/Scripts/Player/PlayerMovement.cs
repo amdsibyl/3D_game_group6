@@ -63,7 +63,6 @@ public class PlayerMovement : MonoBehaviour
 				}
 
 				if (CollisionFlag == true) {
-					//Debug.Log ("Collision_f");
 					mode = 1;
 					CollisionFlag = false;
 				}
