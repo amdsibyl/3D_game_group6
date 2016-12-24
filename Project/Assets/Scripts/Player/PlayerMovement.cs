@@ -134,13 +134,10 @@ public class PlayerMovement : MonoBehaviour
 			mode = 0;
 			nowDirection = 3;
 			CollisionFlag = true;
-		} else if (collision.gameObject.tag == "EndDiamond") {
-			Debug.Log ("EndDiamond");
-			//Destroy (GetComponent<GameObject> ());
-			//LevelUpFlag = true;
 		} else if (collision.gameObject.tag == "End") {
-			Debug.Log ("End");
+			//Debug.Log ("End");
 			LevelUpFlag = true;
+			//print (LevelUpFlag);
 		}
 
 	}//end of OnCollisionEnter()

@@ -4,7 +4,7 @@ using System.Collections;
 
 public class TextManager : MonoBehaviour {
 
-	Text text;
+	public static Text text;
 
 	void Awake ()
 	{
@@ -42,5 +42,6 @@ public class TextManager : MonoBehaviour {
 				}
 			}
 		}
-	}
+
+	}//end of Update()
 }

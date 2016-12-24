@@ -1,17 +1,17 @@
 ﻿using UnityEngine;
 using System.Collections;
+using DG.Tweening;
 
 public class LevelManager : MonoBehaviour {
 
-	public GameObject gameobj;
 	Rigidbody player;
 	public static int NowLevel = 1;
 	public GameObject[] Level;
 	public Vector3[] startCoordinate;
 
+
 	void Start () {
 		player = GetComponent<Rigidbody> ();
-		gameobj = GetComponent<GameObject> ();
 		Show ();
 	}
 	
@@ -20,11 +20,13 @@ public class LevelManager : MonoBehaviour {
 		if (PlayerMovement.LevelUpFlag == true) {
 			if (NowLevel < 3) {
 				++NowLevel;
-
+				//print (NowLevel);
+				TextManager.text.text = "Press!";
 				Show ();
 
 			} else {
 				//Finish
+
 			}
 
 			PlayerMovement.LevelUpFlag = false;
@@ -33,12 +35,13 @@ public class LevelManager : MonoBehaviour {
 	}
 
 	void Show(){
-		player.transform.position = startCoordinate [NowLevel-1];
+
 		for (int i = 0; i < Level.Length; i++) {
 			if (i+1 == NowLevel) {
-				//gameobj.transform.position = startCoordinate [i];
 				Level [i].SetActive (true);
-
+				//player.transform.DOMove (startCoordinate [i] - player.transform.position, 0.5f, false);
+				//player.transform.position = Vector3.MoveTowards(player.transform.position, startCoordinate [i] , 6f);
+				player.transform.position = Vector3.Lerp(player.transform.position, startCoordinate [i] , 6f);
 			} 
 			else {
 				Level [i].SetActive (false);
