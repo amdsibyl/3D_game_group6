@@ -31,9 +31,8 @@ public class EnergyManagerScript : MonoBehaviour {
 		PlayerMovement.data = 0;
 	}
 	void Update () {
-		
 		/*For Computer*/
-		if (Input.GetMouseButtonDown (0)) {
+		if (Input.GetMouseButtonDown (0) && PlayerMovement.isOnFloor) {
 			Reset();
 			UpdateFlag = true;
 		} else if (Input.GetMouseButtonUp (0)) {

@@ -21,6 +21,7 @@ public class PlayerMovement : MonoBehaviour
 	Vector3 movementZ;
 
 	public static bool LevelUpFlag = false;
+	public static bool isOnFloor = false;
 
 	void Awake(){
 		playerRigidbody = GetComponent<Rigidbody> ();
@@ -113,6 +114,7 @@ public class PlayerMovement : MonoBehaviour
 
 	void OnCollisionEnter (Collision collision)
 	{
+		isOnFloor = true;
 
 		if (collision.gameObject.tag == "green_up") {
 			//Debug.Log ("green_up");
@@ -141,5 +143,11 @@ public class PlayerMovement : MonoBehaviour
 		}
 
 	}//end of OnCollisionEnter()
+
+	void OnCollisionExit (Collision collision)
+	{
+		isOnFloor = false;
+	}
+		
 
 }
