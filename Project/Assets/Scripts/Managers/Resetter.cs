@@ -11,15 +11,15 @@ public class Resetter : MonoBehaviour {
 	
 	void Update () {
         if (Input.GetKeyDown(KeyCode.R))
-            Reset();
+			SceneReset();
 	}
 
     void OnTriggerExit(Collider other) {
 		if (other.GetComponent<Rigidbody>() == rigidbody)
-            Reset();
+			SceneReset();
 
     }
-   	void Reset() {
+   	public static void SceneReset() {
         //Application.LoadLevel(Application.loadedLevel);
         SceneManager.LoadScene("Proj01");
     }
