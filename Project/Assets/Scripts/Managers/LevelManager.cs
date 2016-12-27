@@ -13,6 +13,14 @@ public class LevelManager : MonoBehaviour {
 	 * LEVEL2:(5,5,2)
 	 * LEVEL3:(1,5,0) */
 
+	// UI
+	public int UIwindowWidth = 200;
+	public int UIwindowHight = 100;
+	Rect UIwindowRect;
+	public static bool LvupWindowOpen = false;
+	int windowSwitch = 0;
+
+
 	void Start () {
 		player = GetComponent<Rigidbody> ();
 		SetLevel ();
@@ -25,8 +33,7 @@ public class LevelManager : MonoBehaviour {
 				++NowLevel;
 				//print (NowLevel);
 				TextManager.text.text = "Press!";
-				SetLevel ();
-				SceneManager.LoadScene("Proj01");
+				windowSwitch = 1;
 
 			} else {
 				//Finish
@@ -53,5 +60,50 @@ public class LevelManager : MonoBehaviour {
 		//SceneManager.LoadScene("Proj01");
 
 	}
+
+
+	void Awake ()
+	{
+		UIwindowRect = new Rect ( (Screen.width - UIwindowWidth) / 2, (Screen.height - UIwindowHight) / 2, UIwindowWidth, UIwindowHight);
+	}
+
+
+	void OnGUI ()
+	{ 
+
+		if (windowSwitch == 1) {
+			GUI.backgroundColor = Color.black;
+			UIwindowRect = GUI.Window (0, UIwindowRect, LvupWindow, "");
+		} 
+		/*
+		else {
+			GUIAlphaColor_0_To_1 ();
+		}
+		*/
+
+	}
+
+	void LvupWindow (int windowID)
+	{
+		GUI.Label (new Rect (5, 15, 200, 30), "Congratulations! Level completed!");
+
+		LvupWindowOpen = true;
+		if (GUI.Button (new Rect (15, 50, 75, 20), "Quit")) {
+			Application.Quit ();	//only work when build out to the game
+			Time.timeScale = 1;
+			LvupWindowOpen = false;
+		} 
+		if (GUI.Button (new Rect (110, 50, 75, 20), "Continue")) {
+			windowSwitch = 0;
+			SetLevel ();
+			SceneManager.LoadScene("Proj01");
+			Time.timeScale = 1;
+			LvupWindowOpen = false;
+		} 
+
+		GUI.DragWindow (); 
+
+	}
+
 
 }

@@ -32,7 +32,7 @@ public class EnergyManagerScript : MonoBehaviour {
 	}
 	void Update () {
 		/*For Computer*/
-		if (Input.GetMouseButtonDown (0) && PlayerMovement.isOnFloor == true && UIManager.QuitWindowOpen == false) {
+		if (Input.GetMouseButtonDown (0) && PlayerMovement.isOnFloor == true && UIManager.QuitWindowOpen == false && LevelManager.LvupWindowOpen == false) {
 			print (Input.mousePosition);
 			if (Input.mousePosition.x < 200 && (Screen.height - Input.mousePosition.y) < 70) {
 				//back button
@@ -53,9 +53,14 @@ public class EnergyManagerScript : MonoBehaviour {
 			switch (touch.phase) {
 			// Record initial touch position.
 			case TouchPhase.Began:
-				if (PlayerMovement.isOnFloor == true && UIManager.QuitWindowOpen == false) {
-					Reset ();
-					UpdateFlag = true;
+				if (PlayerMovement.isOnFloor == true && UIManager.QuitWindowOpen == false && LevelManager.LvupWindowOpen == false) {
+					if (touch.position.x < 200 && (Screen.height - touch.position.y) < 70) {
+						//back button
+					}
+					else{
+						Reset ();
+						UpdateFlag = true;
+					}
 				}
 				break;
 

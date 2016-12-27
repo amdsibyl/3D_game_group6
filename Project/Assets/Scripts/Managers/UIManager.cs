@@ -50,7 +50,7 @@ public class UIManager : MonoBehaviour {
 	void OnGUI ()
 	{ 
 		if (GUI.Button (new Rect (0, 0, 200, 70), "← Back")){
-			Debug.Log ("CLICK");
+			//Debug.Log ("CLICK");
 			back = true;
 		}
 

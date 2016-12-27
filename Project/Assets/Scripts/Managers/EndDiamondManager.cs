@@ -15,7 +15,10 @@ public class EndDiamondManager : MonoBehaviour {
 	}
 
 	void OnTriggerEnter(Collider other) {
-		Debug.Log("trigger");
+		if (other.tag == "Player") {
+			Debug.Log ("trigger");
+
+		}
 		//Destroy(other.gameObject);
 	}
 }
