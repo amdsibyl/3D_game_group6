@@ -32,7 +32,7 @@ public class EnergyManagerScript : MonoBehaviour {
 	}
 	void Update () {
 		/*For Computer*/
-		if (Input.GetMouseButtonDown (0) && PlayerMovement.isOnFloor) {
+		if (Input.GetMouseButtonDown (0) && PlayerMovement.isOnFloor == true && UIManager.QuitWindowOpen == false) {
 			Reset();
 			UpdateFlag = true;
 		} else if (Input.GetMouseButtonUp (0)) {
@@ -47,8 +47,10 @@ public class EnergyManagerScript : MonoBehaviour {
 			switch (touch.phase) {
 			// Record initial touch position.
 			case TouchPhase.Began:
-				Reset ();
-				UpdateFlag = true;
+				if (PlayerMovement.isOnFloor == true && UIManager.QuitWindowOpen == false) {
+					Reset ();
+					UpdateFlag = true;
+				}
 				break;
 
 				// Determine direction by comparing the current touch position with the initial one.

@@ -9,7 +9,9 @@ public class LevelManager : MonoBehaviour {
 	public static int NowLevel = 1;
 	public GameObject[] Level;
 	public Vector3[] startCoordinate;
-	/*LEVEL1:(3,5,2)	LEVEL2:(5,5,2)	LEVEL3:(1,5,0)*/
+	/* LEVEL1:(3,5,2)
+	 * LEVEL2:(5,5,2)
+	 * LEVEL3:(1,5,0) */
 
 	void Start () {
 		player = GetComponent<Rigidbody> ();
