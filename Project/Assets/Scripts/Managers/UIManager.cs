@@ -12,9 +12,10 @@ public class UIManager : MonoBehaviour {
 	Rect QuitwindowRect;
 
 	// UI
-	public int UIwindowWidth = 80;
-	public int UIwindowHight = 25;
-	bool back = false;
+	public int UIwindowWidth = 200;
+	public int UIwindowHight = 70;
+	public static bool back = false;
+	//public static bool check = false;
 	//bool UIWindowOpen = false;
 	Rect UIwindowRect;
 
@@ -38,27 +39,29 @@ public class UIManager : MonoBehaviour {
 
 	void Update ()
 	{
-		//if (Input.GetKeyDown ("escape") || back == true) {
-		if (Input.GetKeyDown ("escape")) {
+		if (Input.GetKeyDown ("escape") || back == true) {
 			Time.timeScale = 0;
 			windowSwitch = 1;
 			alpha = 0; // Init Window Alpha Color
-			back = false;
 		}
 			
 	}
 
 	void OnGUI ()
 	{ 
-		GUIAlphaColor_0_To_1 ();
-		if (GUI.Button (new Rect (0, 0, 80, 25), "← Back")){
+		if (GUI.Button (new Rect (0, 0, 200, 70), "← Back")){
+			Debug.Log ("CLICK");
 			back = true;
 		}
 
 		if (windowSwitch == 1) {
 			GUI.backgroundColor = Color.black;
 			QuitwindowRect = GUI.Window (0, QuitwindowRect, QuitWindow, "");
+		} 
+		else {
+			GUIAlphaColor_0_To_1 ();
 		}
+
 
 	}
 
@@ -71,21 +74,23 @@ public class UIManager : MonoBehaviour {
 			Application.Quit ();	//only work when build out to the game
 			Time.timeScale = 1;
 			QuitWindowOpen = false;
+			back = false;
 		} 
 		if (GUI.Button (new Rect (110, 30, 75, 20), "Restart")) {
 			SceneManager.LoadScene("Proj01");
 			Time.timeScale = 1;
 			QuitWindowOpen = false;
+			back = false;
 		} 
 		if (GUI.Button (new Rect (110, 70, 75, 20), "Cancel")) {
 			windowSwitch = 0; 
 			Time.timeScale = 1;
 			QuitWindowOpen = false;
+			back = false;
 		} 
 
 		GUI.DragWindow (); 
 
 	}
-
 		
 }

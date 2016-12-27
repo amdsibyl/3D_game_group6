@@ -33,10 +33,16 @@ public class EnergyManagerScript : MonoBehaviour {
 	void Update () {
 		/*For Computer*/
 		if (Input.GetMouseButtonDown (0) && PlayerMovement.isOnFloor == true && UIManager.QuitWindowOpen == false) {
-			Reset();
-			UpdateFlag = true;
+			print (Input.mousePosition);
+			if (Input.mousePosition.x < 200 && (Screen.height - Input.mousePosition.y) < 70) {
+				//back button
+			}
+			else{
+				Reset ();
+				UpdateFlag = true;
+			}
 		} else if (Input.GetMouseButtonUp (0)) {
-			UpdateFlag = false;		
+			UpdateFlag = false;
 		}
 
 		/*For Mobile*/
