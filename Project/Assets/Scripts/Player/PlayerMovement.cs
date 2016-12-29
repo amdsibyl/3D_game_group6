@@ -116,26 +116,54 @@ public class PlayerMovement : MonoBehaviour
 	{
 		isOnFloor = true;
 
+		if (collision.gameObject.tag == "GREEN") {
+			//Debug.Log ("green");
+			if (ColorChange.colorMode != 1) {
+				ColorChange.colorMode = 1;
+				ColorChange.colorUpdateFlag = true;
+			}
+		}
 		if (collision.gameObject.tag == "green_up") {
 			//Debug.Log ("green_up");
 			mode = 0;
 			nowDirection = 0;
+			ColorChange.colorMode = 1;
 			CollisionFlag = true;
 		} else if (collision.gameObject.tag == "green_right") {
 			//Debug.Log ("green_right");
 			mode = 0;
 			nowDirection = 1;
+			ColorChange.colorMode = 1;
 			CollisionFlag = true;
 		} else if (collision.gameObject.tag == "green_down") {
 			//Debug.Log ("green_down");
 			mode = 0;
 			nowDirection = 2;
+			ColorChange.colorMode = 1;
 			CollisionFlag = true;
 		} else if (collision.gameObject.tag == "green_left") {
 			//Debug.Log ("green_left");
 			mode = 0;
 			nowDirection = 3;
+			ColorChange.colorMode = 1;
 			CollisionFlag = true;
+		} else if (collision.gameObject.tag == "RED") {
+			//Debug.Log ("Red");
+			//ColorChange.colorMode = 2;
+			if (ColorChange.colorMode != 2) {
+				ColorChange.colorMode = 2;
+				ColorChange.colorUpdateFlag = true;
+			}
+		
+		} else if (collision.gameObject.tag == "NORMAL") {
+			//Debug.Log ("Normal");
+			//ColorChange.colorMode = 0;
+
+			if (ColorChange.colorMode != 0) {
+				ColorChange.colorMode = 0;
+				ColorChange.colorUpdateFlag = true;
+			}
+
 		} else if (collision.gameObject.tag == "End") {
 			//Debug.Log ("End");
 			LevelUpFlag = true;

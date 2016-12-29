@@ -33,7 +33,7 @@ public class EnergyManagerScript : MonoBehaviour {
 	void Update () {
 		/*For Computer*/
 		if (Input.GetMouseButtonDown (0) && PlayerMovement.isOnFloor == true && UIManager.QuitWindowOpen == false && LevelManager.LvupWindowOpen == false) {
-			print (Input.mousePosition);
+			//print (Input.mousePosition);
 			if (Input.mousePosition.x < 200 && (Screen.height - Input.mousePosition.y) < 70) {
 				//back button
 			}
