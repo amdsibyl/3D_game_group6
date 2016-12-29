@@ -57,7 +57,6 @@ public class LevelManager : MonoBehaviour {
 			}
 		}
 		player.transform.position = Vector3.MoveTowards(player.transform.position, startCoordinate[NowLevel-1] , 6f);
-		//SceneManager.LoadScene("Proj01");
 
 	}
 
@@ -75,28 +74,31 @@ public class LevelManager : MonoBehaviour {
 			GUI.backgroundColor = Color.black;
 			UIwindowRect = GUI.Window (0, UIwindowRect, LvupWindow, "");
 		} 
-		/*
-		else {
-			GUIAlphaColor_0_To_1 ();
-		}
-		*/
 
 	}
 
 	void LvupWindow (int windowID)
 	{
-		GUI.Label (new Rect (5, 15, 200, 30), "Congratulations! Level completed!");
-
+		GUI.Label (new Rect (5, 15, 200, 30), "Level completed!");
 		LvupWindowOpen = true;
+
 		if (GUI.Button (new Rect (15, 50, 75, 20), "Quit")) {
 			Application.Quit ();	//only work when build out to the game
 			Time.timeScale = 1;
 			LvupWindowOpen = false;
 		} 
-		if (GUI.Button (new Rect (110, 50, 75, 20), "Continue")) {
+		if (GUI.Button (new Rect (110, 35, 75, 20), "Restart")) {
+			windowSwitch = 0;
+			ScoreManager.step = 0;
+			LvupWindowOpen = false;
+			SceneManager.LoadScene("Proj01");
+			Time.timeScale = 1;
+		} 
+		if (GUI.Button (new Rect (110, 75, 75, 20), "Continue")) {
 			windowSwitch = 0;
 			SetLevel ();
 			SceneManager.LoadScene("Proj01");
+			ScoreManager.step = 0;
 			Time.timeScale = 1;
 			LvupWindowOpen = false;
 		} 

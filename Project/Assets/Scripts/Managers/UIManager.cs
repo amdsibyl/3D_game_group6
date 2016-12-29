@@ -61,8 +61,7 @@ public class UIManager : MonoBehaviour {
 		else {
 			GUIAlphaColor_0_To_1 ();
 		}
-
-
+			
 	}
 
 	void QuitWindow (int windowID)
@@ -72,11 +71,12 @@ public class UIManager : MonoBehaviour {
 		QuitWindowOpen = true;
 		if (GUI.Button (new Rect (15, 50, 75, 20), "Quit")) {
 			Application.Quit ();	//only work when build out to the game
-			Time.timeScale = 1;
 			QuitWindowOpen = false;
 			back = false;
 		} 
 		if (GUI.Button (new Rect (110, 30, 75, 20), "Restart")) {
+			windowSwitch = 0;
+			ScoreManager.step = 0;
 			SceneManager.LoadScene("Proj01");
 			Time.timeScale = 1;
 			QuitWindowOpen = false;
