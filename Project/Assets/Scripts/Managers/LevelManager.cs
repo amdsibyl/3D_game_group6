@@ -1,7 +1,9 @@
 ﻿using UnityEngine;
-using System.Collections;
 using UnityEngine.SceneManagement;
 using DG.Tweening;
+using UnityEngine.UI;
+using System.Collections;
+using System.Collections.Generic;
 
 public class LevelManager : MonoBehaviour {
 
@@ -13,10 +15,28 @@ public class LevelManager : MonoBehaviour {
 	 * LEVEL2:(5,5,2)
 	 * LEVEL3:(1,5,0) */
 
+
+	public Button restart;
+	public Button next;
+	public Button home;
+	public GameObject lvWindow;
+
+	public Image perfect;
+	public Image excellent;
+	public Image great;
+	public Image good;
+
+	public Image[] stars = new Image[3];
+	public Image[] yStars = new Image[3];
+
+
+	/*
 	// UI
 	public int UIwindowWidth = 200;
 	public int UIwindowHight = 100;
 	Rect UIwindowRect;
+	*/
+
 	public static bool LvupWindowOpen = false;
 	int windowSwitch = 0;
 
@@ -24,22 +44,44 @@ public class LevelManager : MonoBehaviour {
 	void Start () {
 		player = GetComponent<Rigidbody> ();
 		SetLevel ();
+		lvWindow.SetActive (false);
+		Disabled ();
+
+		restart.onClick.AddListener (RestartOnClick);
+		next.onClick.AddListener (NextOnClick);
+		home.onClick.AddListener (HomeOnClick);
 	}
 	
 	void Update () {
 		
 		if (PlayerMovement.LevelUpFlag == true) {
-			if (NowLevel < 3) {
-				++NowLevel;
-				//print (NowLevel);
-				TextManager.text.text = "Press!";
-				windowSwitch = 1;
 
-			} else {
-				//Finish
-				print("Finish!");
-
+			TextManager.text.text = "-";
+			lvWindow.SetActive(true);
+			LvupWindowOpen = true;
+			foreach (Image img in stars) {
+				img.enabled = true;
 			}
+
+			if ((float)ScoreManager.step / ScoreManager.maxStep >= 0.5f) {
+				perfect.enabled = true;
+				foreach (Image img in yStars) {
+					img.enabled = true;
+				}
+			} else if ((float)ScoreManager.step / ScoreManager.maxStep >= 0.3f) {
+				excellent.enabled = true;
+				yStars [0].enabled = true;
+				yStars [1].enabled = true;
+
+			} else if ((float)ScoreManager.step / ScoreManager.maxStep >= 0.2f) {
+				great.enabled = true;
+				yStars [0].enabled = true;
+			} else {
+				good.enabled = true;
+			}
+
+			//if nowLevel=3???
+
 
 			PlayerMovement.LevelUpFlag = false;
 		}
@@ -56,27 +98,56 @@ public class LevelManager : MonoBehaviour {
 				Level [i].SetActive (false);
 			}
 		}
+		ScoreManager.maxStep = (int)Mathf.Pow ((NowLevel + 3), 2) - NowLevel * 4; 
 		player.transform.position = Vector3.MoveTowards(player.transform.position, startCoordinate[NowLevel-1] , 6f);
 
 	}
 
-
-	void Awake ()
-	{
-		UIwindowRect = new Rect ( (Screen.width - UIwindowWidth) / 2, (Screen.height - UIwindowHight) / 2, UIwindowWidth, UIwindowHight);
+	void RestartOnClick(){
+		//Debug.Log ("RestartOnClick");
+		SceneManager.LoadScene("Proj01");
+		ScoreManager.stepUpdate = true;
+		Time.timeScale = 1;
+		Disabled ();
+		LvupWindowOpen = false;
 	}
 
-
-	void OnGUI ()
-	{ 
-
-		if (windowSwitch == 1) {
-			GUI.backgroundColor = Color.black;
-			UIwindowRect = GUI.Window (0, UIwindowRect, LvupWindow, "");
-		} 
-
+	void NextOnClick(){
+		//Debug.Log ("NextOnClick");
+		++NowLevel;
+		SetLevel ();
+		SceneManager.LoadScene("Proj01");
+		ScoreManager.maxStep = (int)Mathf.Pow ((NowLevel + 3), 2) - NowLevel * 4;
+		ScoreManager.stepUpdate = true;
+		Time.timeScale = 1;
+		Disabled ();
+		LvupWindowOpen = false;
 	}
 
+	void HomeOnClick(){
+		//Debug.Log ("HomeOnClick");
+		//home
+		Time.timeScale = 1;
+		Disabled ();
+		LvupWindowOpen = false;
+	}
+
+	void Disabled(){
+		
+		perfect.enabled = false;
+		excellent.enabled = false;
+		great.enabled = false;
+		good.enabled = false;
+
+		foreach (Image img in yStars) {
+			img.enabled = false;
+		}
+		foreach (Image img in stars) {
+			img.enabled = false;
+		}
+	}
+
+	/*
 	void LvupWindow (int windowID)
 	{
 		GUI.Label (new Rect (5, 15, 200, 30), "Level completed!");
@@ -103,9 +174,8 @@ public class LevelManager : MonoBehaviour {
 			LvupWindowOpen = false;
 		} 
 
-		GUI.DragWindow (); 
-
 	}
+	*/
 
 
 }

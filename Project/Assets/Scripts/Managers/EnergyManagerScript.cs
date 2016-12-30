@@ -4,8 +4,11 @@ using UnityEngine.UI;
 
 public class EnergyManagerScript : MonoBehaviour {
 
+	//screen:(200,320)
+
 	public AudioSource pressAudio;
 	public AudioSource releaseAudio;
+	public GameObject pressPanel;
 
 	public float maxEnergy = 10;
 	public float energy = 0;
@@ -19,11 +22,12 @@ public class EnergyManagerScript : MonoBehaviour {
 	bool RedFirst = true;
 	bool MouseClick = false;
 	bool isTouch = false;
+	bool isPlaying = false;
 
 	float startTime;
 	float div;
 	int nowBlock;
-	//int ctr = 0;
+	float energyUnit = 0.15f;
 
 
 	void Start () {
@@ -32,7 +36,8 @@ public class EnergyManagerScript : MonoBehaviour {
 		bar.fillAmount = 0f;
 		MouseClick = false;
 		isTouch = false;
-		//ctr = 0;
+		//print(Screen.width+","+Screen.height);
+		//print("#"+(35* Screen.width/199)+","+(35* Screen.height/319));
 	}
 
 	void Reset (){
@@ -40,26 +45,29 @@ public class EnergyManagerScript : MonoBehaviour {
 		energy = 0;
 		nowBlock = 0;
 		PlayerMovement.data = 0;
+		//isPlaying = false;
 	}
 	void Update () {
 		if (RedFlag == true) {
 			UpdateFlag = true;
+			pressPanel.SetActive(false);
 
 			if (RedFirst == true) {
-				Reset ();
+				startTime = Time.time;
+				energy = 0;
+				nowBlock = 1;
+				PlayerMovement.data = 1;
 				RedFirst = false;
 			}
 
 			//Debug.Log (Time.time - startTime);
 
-			if ((Time.time - startTime) < 3.0f && PlayerMovement.isOnFloor == true && UIManager.QuitWindowOpen == false && LevelManager.LvupWindowOpen == false) {
+			if ((Time.time - startTime) < 3.0f && PlayerMovement.isOnFloor == true && PlayerMovement.QuitWindowOpen == false && LevelManager.LvupWindowOpen == false) {
 
 				/*For Computer*/
 				if (Input.GetMouseButtonDown (0) && MouseClick == false) {
 					//print (Input.mousePosition);
-					//ctr++;
-					//Debug.Log ("Ctr:" + ctr);
-					energy += 0.2f;
+					energy += energyUnit;
 					MouseClick = true;
 				} else if (Input.GetMouseButtonUp (0)) {
 					MouseClick = false;
@@ -74,7 +82,7 @@ public class EnergyManagerScript : MonoBehaviour {
 					// Record initial touch position.
 					case TouchPhase.Began:
 						if (isTouch == false) {
-							energy += 0.2f;
+							energy += energyUnit;
 							isTouch = true;
 						}
 						break;
@@ -95,7 +103,7 @@ public class EnergyManagerScript : MonoBehaviour {
 				for (int i = 1; i < 10; i++) {
 					if (div < 0.1 * i)
 						break;
-					else if (nowBlock == i - 1) {
+					else if (nowBlock == i) {
 						nowBlock++;
 					}
 					PlayerMovement.data = nowBlock;
@@ -112,15 +120,25 @@ public class EnergyManagerScript : MonoBehaviour {
 				
 		}//end of redFlag
 		else {
+			
 			/*For Computer*/
-			if (Input.GetMouseButtonDown (0) && PlayerMovement.isOnFloor == true && UIManager.QuitWindowOpen == false && LevelManager.LvupWindowOpen == false) {
+			if (Input.GetMouseButtonDown (0) && PlayerMovement.isOnFloor == true && PlayerMovement.QuitWindowOpen == false && LevelManager.LvupWindowOpen == false) {
 				//print (Input.mousePosition);
-				pressAudio.Play ();
-				if (Input.mousePosition.x < 200 && (Screen.height - Input.mousePosition.y) < 70) {
-					//back button
+				//print (Screen.height - Input.mousePosition.y);
+
+
+				if (Input.mousePosition.x < (35* Screen.width/199)  && (Screen.height - Input.mousePosition.y) < (35* Screen.height/319) ) {
+					//pause button
 				} else {
+					
+					if (isPlaying == false) {
+						pressAudio.Play ();
+						isPlaying = true;
+					}
+					pressPanel.SetActive(false);
 					Reset ();
 					UpdateFlag = true;
+
 				}
 			} else if (Input.GetMouseButtonUp (0)) {
 				UpdateFlag = false;
@@ -128,7 +146,11 @@ public class EnergyManagerScript : MonoBehaviour {
 
 			/*For Mobile*/
 			if (Input.touchCount > 0) {
-				pressAudio.Play ();
+				if (isPlaying == false) {
+					pressAudio.Play ();
+					isPlaying = true;
+				}
+				pressPanel.SetActive(false);
 				Touch touch = Input.GetTouch (0);
 
 				// Handle finger movements based on touch phase.
@@ -136,11 +158,18 @@ public class EnergyManagerScript : MonoBehaviour {
 				// Record initial touch position.
 				case TouchPhase.Began:
 					if (PlayerMovement.isOnFloor == true && UIManager.QuitWindowOpen == false && LevelManager.LvupWindowOpen == false) {
-						if (touch.position.x < 200 && (Screen.height - touch.position.y) < 70) {
-							//back button
+						if (Input.mousePosition.x < (35* Screen.width/199)  && (Screen.height - Input.mousePosition.y) < (35* Screen.height/319) ) {
+							//pause button
 						} else {
+
+							if (isPlaying == false) {
+								pressAudio.Play ();
+								isPlaying = true;
+							}
+							pressPanel.SetActive(false);
 							Reset ();
 							UpdateFlag = true;
+
 						}
 					}
 					break;
@@ -160,7 +189,6 @@ public class EnergyManagerScript : MonoBehaviour {
 				energy = Mathf.Pow (Time.time - startTime, 2) * speedLevel;
 				//Debug.Log (Time.time - startTime);
 				div = energy / maxEnergy;
-
 				if ((div >= 0.4 && nowBlock == 0) || (div >= 0.7 && nowBlock == 1) || (div >= 0.9 && nowBlock == 2)) {
 					nowBlock++;
 				}
@@ -168,19 +196,21 @@ public class EnergyManagerScript : MonoBehaviour {
 
 				if (div >= 1.1) {
 					Reset ();
+					pressAudio.Play ();
 				}
-				//Debug.Log ("Energy:"+energy);
-				//div = energy / maxEnergy;
+
 				bar.fillAmount = div * 0.5f;
 				Done = true;
 
 			}
 
 		}
-		if (UpdateFlag ==false && Done == true) {
+		if (UpdateFlag == false && Done == true) {
 			pressAudio.Stop ();
 			releaseAudio.Play ();
 			Start ();
+			isPlaying = false;
+			//pressPanel.SetActive(true);
 		}
 			
 	}//end of Update

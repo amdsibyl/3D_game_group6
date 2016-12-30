@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
+using UnityEngine.SceneManagement;
 //using TouchScript.Gestures;
 //using TouchScript.Hit;
 using DG.Tweening;
@@ -16,10 +17,18 @@ public class PlayerMovement : MonoBehaviour
 
 	public float speed = 30f;
 	bool CollisionFlag = false;
+
 	Vector3 movement;
 	Rigidbody playerRigidbody;
 	Vector3 movementX;
 	Vector3 movementZ;
+
+	public Button pause;
+	public Button cancel;
+	public Button restart;
+	public Button home;
+	public GameObject quitWindow;
+	public static bool QuitWindowOpen = false;
 
 	public static bool LevelUpFlag = false;
 	public static bool isOnFloor = false;
@@ -28,13 +37,18 @@ public class PlayerMovement : MonoBehaviour
 		playerRigidbody = GetComponent<Rigidbody> ();
 		mode = 1;
 		data = 0;
+		pause.onClick.AddListener (PauseOnClick);
+		cancel.onClick.AddListener (CancelOnClick);
+		restart.onClick.AddListener (RestartOnClick);
+		home.onClick.AddListener (HomeOnClick);
+		quitWindow.SetActive (false);
 	}
 
 	void Update(){
 
 		if (EnergyManagerScript.UpdateFlag == false && EnergyManagerScript.Done == true) {
 			playerRigidbody.velocity = new Vector3 (0, 9.8f * 0.9f / 2.0f, 0);
-			ScoreManager.step += 1;
+			ScoreManager.step -= 1;
 
 			if (mode == 0) {
 				//Debug.Log ("mode0:"+data);
@@ -65,7 +79,7 @@ public class PlayerMovement : MonoBehaviour
 					playerRigidbody.transform.DOJump(playerRigidbody.transform.position - movementX, 1, 1, 1.2f, false);
 					break;
 				}
-
+				Handheld.Vibrate();
 				if (CollisionFlag == true) {
 					mode = 1;
 					CollisionFlag = false;
@@ -104,13 +118,14 @@ public class PlayerMovement : MonoBehaviour
 						break;
 
 				}
+				Handheld.Vibrate();
 				nowDirection = data;
 
 			}//end of mode 1
 			else{
 				//Red Mode
 				//Debug.Log ("mode2:"+data);
-				movementX = new Vector3(2f,0,0);
+				movementX = new Vector3(2f * data,0,0);
 				playerRigidbody.transform.DOJump(playerRigidbody.transform.position - movementX, 1, 1, 1.2f, false);
 
 				if (CollisionFlag == true) {
@@ -186,6 +201,34 @@ public class PlayerMovement : MonoBehaviour
 	{
 		isOnFloor = false;
 	}
-		
+
+	void PauseOnClick(){
+		//Debug.Log ("pause!");
+		Time.timeScale = 0;
+		quitWindow.SetActive (true);
+		QuitWindowOpen = true;
+	}
+
+	void CancelOnClick(){
+		//Debug.Log ("CancelOnClick!");
+		quitWindow.SetActive (false);
+		QuitWindowOpen = false;
+		Time.timeScale = 1;
+	}
+
+	void RestartOnClick(){
+		//Debug.Log ("RestartOnClick!");
+		SceneManager.LoadScene("Proj01");
+		ScoreManager.stepUpdate = true;
+		Time.timeScale = 1;
+		QuitWindowOpen = false;
+	}
+
+	void HomeOnClick(){
+		//Debug.Log ("HomeOnClick!");
+		//home
+		Time.timeScale = 1;
+		QuitWindowOpen = false;
+	}
 
 }

@@ -1,0 +1,21 @@
+fileFormatVersion: 2
+guid: ba918109242f80a4a9a0187ffa94d9cf
+timeCreated: 1483104967
+licenseType: Free
+TrueTypeFontImporter:
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: OlivesBold
+  fontNames:
+  - OlivesBold
+  fallbackFontReferences: []
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

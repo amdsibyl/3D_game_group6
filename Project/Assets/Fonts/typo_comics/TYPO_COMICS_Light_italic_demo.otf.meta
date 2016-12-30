@@ -1,0 +1,21 @@
+fileFormatVersion: 2
+guid: a7cfe8053b31f1744ae047747ec3672d
+timeCreated: 1483104967
+licenseType: Free
+TrueTypeFontImporter:
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: TYPO COMICS Light Italic DEMO
+  fontNames:
+  - TYPO COMICS Light Italic DEMO
+  fallbackFontReferences: []
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

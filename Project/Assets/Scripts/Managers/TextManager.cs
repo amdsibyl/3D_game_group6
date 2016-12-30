@@ -37,7 +37,7 @@ public class TextManager : MonoBehaviour {
 					break;
 
 				default:
-					text.text = "Press!";
+					text.text = "-";
 					break;
 				}
 			} else {
@@ -47,7 +47,7 @@ public class TextManager : MonoBehaviour {
 			startTime = Time.time;
 		} 
 		else if (PlayerMovement.isOnFloor == true && (Time.time - startTime) > 1.3f) {
-			text.text = "Press!";
+			text.text = "-";
 		}
 
 	}//end of Update()

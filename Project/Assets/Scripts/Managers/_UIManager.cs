@@ -49,10 +49,12 @@ public class UIManager : MonoBehaviour {
 
 	void OnGUI ()
 	{ 
+
 		if (GUI.Button (new Rect (0, 0, 200, 70), "← Back")){
 			//Debug.Log ("CLICK");
 			back = true;
 		}
+
 
 		if (windowSwitch == 1) {
 			GUI.backgroundColor = Color.black;
@@ -73,10 +75,10 @@ public class UIManager : MonoBehaviour {
 			Application.Quit ();	//only work when build out to the game
 			QuitWindowOpen = false;
 			back = false;
-		} 
+		}
 		if (GUI.Button (new Rect (110, 30, 75, 20), "Restart")) {
 			windowSwitch = 0;
-			ScoreManager.step = 0;
+			ScoreManager.step = 12;
 			SceneManager.LoadScene("Proj01");
 			Time.timeScale = 1;
 			QuitWindowOpen = false;
@@ -88,9 +90,7 @@ public class UIManager : MonoBehaviour {
 			QuitWindowOpen = false;
 			back = false;
 		} 
-
-		GUI.DragWindow (); 
-
+			
 	}
 		
 }

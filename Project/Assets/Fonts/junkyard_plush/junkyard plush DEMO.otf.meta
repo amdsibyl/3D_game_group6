@@ -1,0 +1,21 @@
+fileFormatVersion: 2
+guid: 517e0e2f0accded4da354df415a5a85d
+timeCreated: 1483104967
+licenseType: Free
+TrueTypeFontImporter:
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Junkyard Plush DEMO
+  fontNames:
+  - Junkyard Plush DEMO
+  fallbackFontReferences: []
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

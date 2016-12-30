@@ -1,0 +1,21 @@
+fileFormatVersion: 2
+guid: 1209b0d58ab9d1d46938d5e2ace8768e
+timeCreated: 1483108613
+licenseType: Free
+TrueTypeFontImporter:
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Austie Bost Arrow Mania
+  fontNames:
+  - Austie Bost Arrow Mania
+  fallbackFontReferences: []
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
