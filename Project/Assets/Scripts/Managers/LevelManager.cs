@@ -110,17 +110,20 @@ public class LevelManager : MonoBehaviour {
 		ScoreManager.stepUpdate = true;
 		Time.timeScale = 1;
 		Disabled ();
+
+		ScoreManager.lvStepsUpdate [NowLevel - 1] = true;
 		LvupWindowOpen = false;
 	}
 
 	void NextOnClick(){
 		//Debug.Log ("NextOnClick");
+		ScoreManager.lvStepsUpdate [NowLevel - 1] = true;
 		++NowLevel;
 		SetLevel ();
-		//Resetter.ResetFlag = true;
 		SceneManager.LoadScene("Proj01");
 		ScoreManager.maxStep = (int)Mathf.Pow ((NowLevel + 3), 2) - NowLevel * 4;
 		ScoreManager.stepUpdate = true;
+
 		Time.timeScale = 1;
 		Disabled ();
 		LvupWindowOpen = false;
@@ -130,7 +133,7 @@ public class LevelManager : MonoBehaviour {
 		//Debug.Log ("HomeOnClick");
 		//home
 		//Application.Quit ();
-
+		ScoreManager.lvStepsUpdate [NowLevel - 1] = true;
 		Time.timeScale = 1;
 		Disabled ();
 		//LvupWindowOpen = false;
