@@ -105,6 +105,7 @@ public class LevelManager : MonoBehaviour {
 
 	void RestartOnClick(){
 		//Debug.Log ("RestartOnClick");
+		//Resetter.ResetFlag = true;
 		SceneManager.LoadScene("Proj01");
 		ScoreManager.stepUpdate = true;
 		Time.timeScale = 1;
@@ -116,6 +117,7 @@ public class LevelManager : MonoBehaviour {
 		//Debug.Log ("NextOnClick");
 		++NowLevel;
 		SetLevel ();
+		//Resetter.ResetFlag = true;
 		SceneManager.LoadScene("Proj01");
 		ScoreManager.maxStep = (int)Mathf.Pow ((NowLevel + 3), 2) - NowLevel * 4;
 		ScoreManager.stepUpdate = true;
@@ -127,9 +129,11 @@ public class LevelManager : MonoBehaviour {
 	void HomeOnClick(){
 		//Debug.Log ("HomeOnClick");
 		//home
+		//Application.Quit ();
+
 		Time.timeScale = 1;
 		Disabled ();
-		LvupWindowOpen = false;
+		//LvupWindowOpen = false;
 	}
 
 	void Disabled(){

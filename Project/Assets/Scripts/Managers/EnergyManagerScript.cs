@@ -126,7 +126,6 @@ public class EnergyManagerScript : MonoBehaviour {
 				//print (Input.mousePosition);
 				//print (Screen.height - Input.mousePosition.y);
 
-
 				if (Input.mousePosition.x < (35* Screen.width/199)  && (Screen.height - Input.mousePosition.y) < (35* Screen.height/319) ) {
 					//pause button
 				} else {
@@ -146,18 +145,13 @@ public class EnergyManagerScript : MonoBehaviour {
 
 			/*For Mobile*/
 			if (Input.touchCount > 0) {
-				if (isPlaying == false) {
-					pressAudio.Play ();
-					isPlaying = true;
-				}
-				pressPanel.SetActive(false);
 				Touch touch = Input.GetTouch (0);
 
 				// Handle finger movements based on touch phase.
 				switch (touch.phase) {
 				// Record initial touch position.
 				case TouchPhase.Began:
-					if (PlayerMovement.isOnFloor == true && UIManager.QuitWindowOpen == false && LevelManager.LvupWindowOpen == false) {
+					if (PlayerMovement.isOnFloor == true && PlayerMovement.QuitWindowOpen == false && LevelManager.LvupWindowOpen == false) {
 						if (Input.mousePosition.x < (35* Screen.width/199)  && (Screen.height - Input.mousePosition.y) < (35* Screen.height/319) ) {
 							//pause button
 						} else {
@@ -204,10 +198,11 @@ public class EnergyManagerScript : MonoBehaviour {
 
 			}
 
-		}
+		}//end of else
+
 		if (UpdateFlag == false && Done == true) {
 			pressAudio.Stop ();
-			if(PlayerMovement.isOnFloor == true)
+			if(PlayerMovement.isOnFloor == true && PlayerMovement.QuitWindowOpen == false && LevelManager.LvupWindowOpen == false)
 				releaseAudio.Play ();
 			Start ();
 			isPlaying = false;

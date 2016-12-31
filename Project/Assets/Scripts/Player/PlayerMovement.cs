@@ -218,6 +218,7 @@ public class PlayerMovement : MonoBehaviour
 
 	void RestartOnClick(){
 		//Debug.Log ("RestartOnClick!");
+		//Resetter.ResetFlag = true;
 		SceneManager.LoadScene("Proj01");
 		ScoreManager.stepUpdate = true;
 		Time.timeScale = 1;
@@ -227,8 +228,11 @@ public class PlayerMovement : MonoBehaviour
 	void HomeOnClick(){
 		//Debug.Log ("HomeOnClick!");
 		//home
-		Time.timeScale = 1;
-		QuitWindowOpen = false;
+		Application.Quit ();
+		//Resetter.ResetFlag = true;
+
+		//Time.timeScale = 1;
+		//QuitWindowOpen = false;
 	}
 
 }
