@@ -27,7 +27,7 @@ public class EnergyManagerScript : MonoBehaviour {
 	float startTime;
 	float div;
 	int nowBlock;
-	float energyUnit = 0.15f;
+	float energyUnit = 0.3f;
 
 
 	void Start () {
@@ -100,8 +100,9 @@ public class EnergyManagerScript : MonoBehaviour {
 				div = energy / maxEnergy;
 				bar.fillAmount = div * 0.5f;
 
+				/*most: 5 steps*/
 				for (int i = 1; i < 10; i++) {
-					if (div < 0.1 * i)
+					if (div < 0.2 * i)
 						break;
 					else if (nowBlock == i) {
 						nowBlock++;

@@ -8,7 +8,7 @@ using System.Collections.Generic;
 public class LevelManager : MonoBehaviour {
 
 	Rigidbody player;
-	public static int NowLevel = 1;
+	public static int NowLevel = 3;
 	public GameObject[] Level;
 	public Vector3[] startCoordinate;
 	/* LEVEL1:(3,5,2)

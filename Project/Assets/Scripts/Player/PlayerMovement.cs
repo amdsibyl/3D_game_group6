@@ -125,8 +125,30 @@ public class PlayerMovement : MonoBehaviour
 			else{
 				//Red Mode
 				//Debug.Log ("mode2:"+data);
-				movementX = new Vector3(2f * data,0,0);
-				playerRigidbody.transform.DOJump(playerRigidbody.transform.position - movementX, 1, 1, 1.2f, false);
+
+				movementX = new Vector3(2f,0,0);
+				movementZ = new Vector3(0,0,2f);
+
+				switch (data) {
+				case 1:
+					playerRigidbody.transform.DOJump(playerRigidbody.transform.position + movementZ, 1, 1, 1.2f, false);
+					break;
+				case 2:
+					playerRigidbody.transform.DOJump (playerRigidbody.transform.position + movementZ * 2, 1, 1, 1.2f, false);
+					break;
+				case 3:
+					playerRigidbody.transform.DOJump(playerRigidbody.transform.position + movementZ * 2 + movementX, 1, 1, 1.2f, false);
+					break;
+				case 4:
+					playerRigidbody.transform.DOJump(playerRigidbody.transform.position + movementZ * 2 + movementX * 2, 1, 1, 1.2f, false);
+					break;
+				case 5:
+					playerRigidbody.transform.DOJump(playerRigidbody.transform.position + movementZ * 2 + movementX * 3, 1, 1, 1.2f, false);
+					break;
+				default:
+					break;
+
+				}
 
 				if (CollisionFlag == true) {
 					mode = 1;
