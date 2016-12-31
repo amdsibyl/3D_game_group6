@@ -62,7 +62,7 @@ public class EnergyManagerScript : MonoBehaviour {
 
 			//Debug.Log (Time.time - startTime);
 
-			if ((Time.time - startTime) < 3.0f && PlayerMovement.isOnFloor == true && PlayerMovement.QuitWindowOpen == false && LevelManager.LvupWindowOpen == false) {
+			if ((Time.time - startTime) < 3.0f && PlayerMovement.isOnFloor == true && PlayerMovement.QuitWindowOpen == false && LevelManager.LvupWindowOpen == false && Resetter.ResetWindowOpen == false) {
 
 				/*For Computer*/
 				if (Input.GetMouseButtonDown (0) && MouseClick == false) {
@@ -207,7 +207,8 @@ public class EnergyManagerScript : MonoBehaviour {
 		}
 		if (UpdateFlag == false && Done == true) {
 			pressAudio.Stop ();
-			releaseAudio.Play ();
+			if(PlayerMovement.isOnFloor == true)
+				releaseAudio.Play ();
 			Start ();
 			isPlaying = false;
 			//pressPanel.SetActive(true);

@@ -25,6 +25,7 @@ public class Resetter : MonoBehaviour {
 		if (ScoreManager.step <= 0) {
 			//game over
 			gameOverWindow.SetActive (true);
+			ResetWindowOpen = true;
 		}
 
 	}
