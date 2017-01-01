@@ -16,6 +16,7 @@ public class LevelManager : MonoBehaviour {
 	 * LEVEL3:(1,5,0) */
 
 	public AudioSource winAudio;
+	bool isPlaying = false;
 
 	public Button restart;
 	public Button next;
@@ -47,6 +48,7 @@ public class LevelManager : MonoBehaviour {
 		SetLevel ();
 		lvWindow.SetActive (false);
 		Disabled ();
+		isPlaying = false;
 
 		restart.onClick.AddListener (RestartOnClick);
 		next.onClick.AddListener (NextOnClick);
@@ -59,7 +61,10 @@ public class LevelManager : MonoBehaviour {
 
 			TextManager.text.text = "-";
 			lvWindow.SetActive(true);
-			winAudio.Play ();
+			if (isPlaying == false) {
+				winAudio.Play ();
+				isPlaying = true;
+			}
 			LvupWindowOpen = true;
 			foreach (Image img in stars) {
 				img.enabled = true;
@@ -82,10 +87,14 @@ public class LevelManager : MonoBehaviour {
 				good.enabled = true;
 			}
 
-			//if nowLevel=3???
+			if (NowLevel == 3) {
+				//what should we do?
+				
+			}
 
-
+			isPlaying = false;
 			PlayerMovement.LevelUpFlag = false;
+
 		}
 
 	}
