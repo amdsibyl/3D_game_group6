@@ -18,6 +18,8 @@ public class PlayerMovement : MonoBehaviour
 	public float speed = 30f;
 	bool CollisionFlag = false;
 
+	public AudioSource loseAudio;
+
 	Vector3 movement;
 	Rigidbody playerRigidbody;
 	Vector3 movementX;
@@ -32,6 +34,7 @@ public class PlayerMovement : MonoBehaviour
 
 	public static bool LevelUpFlag = false;
 	public static bool isOnFloor = false;
+	bool isPlaying = false;
 
 	void Awake(){
 		playerRigidbody = GetComponent<Rigidbody> ();
@@ -42,11 +45,17 @@ public class PlayerMovement : MonoBehaviour
 		restart.onClick.AddListener (RestartOnClick);
 		home.onClick.AddListener (HomeOnClick);
 		quitWindow.SetActive (false);
+		isPlaying = false;
 	}
 
 	void Update(){
 
-		if (EnergyManagerScript.UpdateFlag == false && EnergyManagerScript.Done == true) {
+		if (playerRigidbody.transform.position.y < 0 && isPlaying == false) {
+			loseAudio.Play ();
+			Debug.Log ("play");
+			isPlaying = true;
+		}
+		else if (EnergyManagerScript.UpdateFlag == false && EnergyManagerScript.Done == true) {
 			playerRigidbody.velocity = new Vector3 (0, 9.8f * 0.9f / 2.0f, 0);
 			ScoreManager.step -= 1;
 

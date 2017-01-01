@@ -15,6 +15,7 @@ public class LevelManager : MonoBehaviour {
 	 * LEVEL2:(5,5,2)
 	 * LEVEL3:(1,5,0) */
 
+	public AudioSource winAudio;
 
 	public Button restart;
 	public Button next;
@@ -38,7 +39,7 @@ public class LevelManager : MonoBehaviour {
 	*/
 
 	public static bool LvupWindowOpen = false;
-	int windowSwitch = 0;
+	//int windowSwitch = 0;
 
 
 	void Start () {
@@ -58,6 +59,7 @@ public class LevelManager : MonoBehaviour {
 
 			TextManager.text.text = "-";
 			lvWindow.SetActive(true);
+			winAudio.Play ();
 			LvupWindowOpen = true;
 			foreach (Image img in stars) {
 				img.enabled = true;
@@ -106,18 +108,19 @@ public class LevelManager : MonoBehaviour {
 	void RestartOnClick(){
 		//Debug.Log ("RestartOnClick");
 		//Resetter.ResetFlag = true;
-		SceneManager.LoadScene("Proj01");
 		ScoreManager.stepUpdate = true;
 		Time.timeScale = 1;
 		Disabled ();
 
-		ScoreManager.lvStepsUpdate [NowLevel - 1] = true;
+		HighScoreManager.lvStepsUpdate [NowLevel - 1] = true;
+		winAudio.Stop ();
+		SceneManager.LoadScene("Proj01");
 		LvupWindowOpen = false;
 	}
 
 	void NextOnClick(){
 		//Debug.Log ("NextOnClick");
-		ScoreManager.lvStepsUpdate [NowLevel - 1] = true;
+		HighScoreManager.lvStepsUpdate [NowLevel - 1] = true;
 		++NowLevel;
 		SetLevel ();
 		SceneManager.LoadScene("Proj01");
@@ -126,6 +129,7 @@ public class LevelManager : MonoBehaviour {
 
 		Time.timeScale = 1;
 		Disabled ();
+		winAudio.Stop ();
 		LvupWindowOpen = false;
 	}
 
@@ -133,9 +137,10 @@ public class LevelManager : MonoBehaviour {
 		//Debug.Log ("HomeOnClick");
 		//home
 		//Application.Quit ();
-		ScoreManager.lvStepsUpdate [NowLevel - 1] = true;
+		HighScoreManager.lvStepsUpdate [NowLevel - 1] = true;
 		Time.timeScale = 1;
 		Disabled ();
+		winAudio.Stop ();
 		//LvupWindowOpen = false;
 	}
 
