@@ -32,15 +32,7 @@ public class LevelManager : MonoBehaviour {
 	public Image[] yStars = new Image[3];
 	public static int nowStar;
 
-	/*
-	// UI
-	public int UIwindowWidth = 200;
-	public int UIwindowHight = 100;
-	Rect UIwindowRect;
-	*/
-
 	public static bool LvupWindowOpen = false;
-	//int windowSwitch = 0;
 
 
 	void Start () {
@@ -96,6 +88,7 @@ public class LevelManager : MonoBehaviour {
 				good.enabled = true;
 				nowStar = 0;
 			}
+			print ("nowStar:::"+nowStar);
 
 			if (NowLevel == 3) {
 				//what should we do?
@@ -154,14 +147,13 @@ public class LevelManager : MonoBehaviour {
 	}
 
 	void HomeOnClick(){
-		//Debug.Log ("HomeOnClick");
-		//home
-		//Application.Quit ();
+		HomePageManager.backHome = true;
 		HighScoreManager.lvStepsUpdate [NowLevel - 1] = true;
 		Time.timeScale = 1;
 		Disabled ();
 		winAudio.Stop ();
-		//LvupWindowOpen = false;
+		//SceneManager.LoadScene ("Proj01");
+		LvupWindowOpen = false;
 	}
 
 	void Disabled(){
@@ -178,36 +170,5 @@ public class LevelManager : MonoBehaviour {
 			img.enabled = false;
 		}
 	}
-
-	/*
-	void LvupWindow (int windowID)
-	{
-		GUI.Label (new Rect (5, 15, 200, 30), "Level completed!");
-		LvupWindowOpen = true;
-
-		if (GUI.Button (new Rect (15, 50, 75, 20), "Quit")) {
-			Application.Quit ();	//only work when build out to the game
-			Time.timeScale = 1;
-			LvupWindowOpen = false;
-		} 
-		if (GUI.Button (new Rect (110, 35, 75, 20), "Restart")) {
-			windowSwitch = 0;
-			ScoreManager.step = 0;
-			LvupWindowOpen = false;
-			SceneManager.LoadScene("Proj01");
-			Time.timeScale = 1;
-		} 
-		if (GUI.Button (new Rect (110, 75, 75, 20), "Continue")) {
-			windowSwitch = 0;
-			SetLevel ();
-			SceneManager.LoadScene("Proj01");
-			ScoreManager.step = 0;
-			Time.timeScale = 1;
-			LvupWindowOpen = false;
-		} 
-
-	}
-	*/
-
 
 }

@@ -2,8 +2,6 @@
 using UnityEngine.UI;
 using System.Collections;
 using UnityEngine.SceneManagement;
-//using TouchScript.Gestures;
-//using TouchScript.Hit;
 using DG.Tweening;
 
 public class PlayerMovement : MonoBehaviour
@@ -257,13 +255,10 @@ public class PlayerMovement : MonoBehaviour
 	}
 
 	void HomeOnClick(){
-		//Debug.Log ("HomeOnClick!");
-		//home
-		Application.Quit ();
-		//Resetter.ResetFlag = true;
-
-		//Time.timeScale = 1;
-		//QuitWindowOpen = false;
+		HomePageManager.backHome = true;
+		Time.timeScale = 1;
+		//SceneManager.LoadScene ("Proj01");
+		QuitWindowOpen = false;
 	}
 
 }

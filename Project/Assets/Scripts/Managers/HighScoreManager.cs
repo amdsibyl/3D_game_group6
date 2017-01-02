@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class HighScoreManager : MonoBehaviour {
+
 	public static Text text;
 	public static int[] lvSteps = new int[3];
 	public static int[] highStar = new int[3];
@@ -101,12 +102,12 @@ public class HighScoreManager : MonoBehaviour {
 					PlayerPrefs.SetInt (lv [i], ScoreManager.step);
 					PlayerPrefs.Save ();
 				}
-				print(PlayerPrefs.GetInt(lv[i]));
+				//print(PlayerPrefs.GetInt(lv[i]));
 
-				if (LevelManager.nowStar > highStar[i]) {
+				if (LevelManager.nowStar >= highStar[i]) {
 					PlayerPrefs.SetInt (lvStar [i], LevelManager.nowStar);
 				}
-				print(PlayerPrefs.GetInt(lvStar[i]));
+				//print("star"+PlayerPrefs.GetInt(lvStar[i]));
 
 				lvStepsUpdate [i] = false;
 				break;

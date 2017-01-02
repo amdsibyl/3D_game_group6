@@ -5,7 +5,7 @@ using UnityEngine.UI;
 public class EnergyManagerScript : MonoBehaviour {
 
 	//screen:(200,320)
-
+	public Text text;
 	public AudioSource pressAudio;
 	public AudioSource releaseAudio;
 	public GameObject pressPanel;
@@ -31,6 +31,7 @@ public class EnergyManagerScript : MonoBehaviour {
 
 
 	void Start () {
+		text.enabled = false;
 		nowBlock = -1;
 		energy = 0;
 		bar.fillAmount = 0f;
@@ -62,8 +63,17 @@ public class EnergyManagerScript : MonoBehaviour {
 
 			//Debug.Log (Time.time - startTime);
 
-			if ((Time.time - startTime) < 3.0f && PlayerMovement.isOnFloor == true && PlayerMovement.QuitWindowOpen == false && LevelManager.LvupWindowOpen == false && Resetter.ResetWindowOpen == false) {
+			if ((Time.time - startTime) < 3.0f && PlayerMovement.isOnFloor == true && HomePageManager.HomeWindowOpen == false
+				&& PlayerMovement.QuitWindowOpen == false && LevelManager.LvupWindowOpen == false 
+				&& Resetter.ResetWindowOpen == false && DifficultyManager.DiffWindowOpen == false) {
 
+				text.enabled = true;
+				if ((Time.time - startTime) == 2.0f) {
+					text.text = "2";
+				}
+				else if((Time.time - startTime) == 1.0f){
+					text.text = "1";
+				}
 				/*For Computer*/
 				if (Input.GetMouseButtonDown (0) && MouseClick == false) {
 					//print (Input.mousePosition);
@@ -116,6 +126,7 @@ public class EnergyManagerScript : MonoBehaviour {
 
 			}//end when timeout
 			else if((Time.time - startTime) >= 3.0f){
+				text.enabled = false;
 				//Debug.Log ("Timeout");
 				RedFlag = false;
 				Done = true;
@@ -124,13 +135,15 @@ public class EnergyManagerScript : MonoBehaviour {
 				
 		}//end of redFlag
 		else {
-			
+
 			/*For Computer*/
-			if (Input.GetMouseButtonDown (0) && PlayerMovement.isOnFloor == true && PlayerMovement.QuitWindowOpen == false && LevelManager.LvupWindowOpen == false) {
+			if (Input.GetMouseButtonDown (0) && PlayerMovement.isOnFloor == true  && HomePageManager.HomeWindowOpen == false
+				&& PlayerMovement.QuitWindowOpen == false && LevelManager.LvupWindowOpen == false 
+				&& Resetter.ResetWindowOpen == false && DifficultyManager.DiffWindowOpen == false) {
 				//print (Input.mousePosition);
 				//print (Screen.height - Input.mousePosition.y);
 
-				if (Input.mousePosition.x < (35* Screen.width/199)  && (Screen.height - Input.mousePosition.y) < (35* Screen.height/319) ) {
+				if (Input.mousePosition.x < (35 * Screen.width / 199) && (Screen.height - Input.mousePosition.y) < (35 * Screen.height / 319)) {
 					//pause button
 				} else {
 					
@@ -138,14 +151,14 @@ public class EnergyManagerScript : MonoBehaviour {
 						pressAudio.Play ();
 						isPlaying = true;
 					}
-					pressPanel.SetActive(false);
+					pressPanel.SetActive (false);
 					Reset ();
 					UpdateFlag = true;
 
 				}
 			} else if (Input.GetMouseButtonUp (0)) {
 				UpdateFlag = false;
-			}
+			} 
 
 			/*For Mobile*/
 			if (Input.touchCount > 0) {
@@ -155,7 +168,9 @@ public class EnergyManagerScript : MonoBehaviour {
 				switch (touch.phase) {
 				// Record initial touch position.
 				case TouchPhase.Began:
-					if (PlayerMovement.isOnFloor == true && PlayerMovement.QuitWindowOpen == false && LevelManager.LvupWindowOpen == false) {
+					if (PlayerMovement.isOnFloor == true && HomePageManager.HomeWindowOpen == false
+						&& PlayerMovement.QuitWindowOpen == false && LevelManager.LvupWindowOpen == false 
+						&& Resetter.ResetWindowOpen == false && DifficultyManager.DiffWindowOpen == false) {
 						if (Input.mousePosition.x < (35* Screen.width/199)  && (Screen.height - Input.mousePosition.y) < (35* Screen.height/319) ) {
 							//pause button
 						} else {

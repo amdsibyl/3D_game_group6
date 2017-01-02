@@ -8,15 +8,19 @@ public class Resetter : MonoBehaviour {
     public Rigidbody rigidbody;
     public float resetSpeed = 0.025f;
 
+	public AudioSource loseAudio;
+
 	public Button restart;
 	public Button home;
 	public GameObject gameOverWindow;
 	public static bool ResetWindowOpen = false;
 	public static bool ResetFlag = false;
+	bool isPlaying = false;
 
 
 	void Start () {
 		ResetFlag = false;
+		isPlaying = false;
 		restart.onClick.AddListener (RestartOnClick);
 		home.onClick.AddListener (HomeOnClick);
 		gameOverWindow.SetActive (false);
@@ -26,15 +30,21 @@ public class Resetter : MonoBehaviour {
 		
 		if (ScoreManager.step <= 0) {
 			//game over
-			gameOverWindow.SetActive (true);
-			ResetWindowOpen = true;
+			if (isPlaying == false) {
+				loseAudio.Play ();
+				gameOverWindow.SetActive (true);
+				ResetWindowOpen = true;
+				isPlaying = true;
+			}
 		}
 
 	}
 
     void OnTriggerExit(Collider other) {
-		if (other.GetComponent<Rigidbody> () == rigidbody)
+		if (other.GetComponent<Rigidbody> () == rigidbody) {
 			gameOverWindow.SetActive (true);
+			ResetWindowOpen = true;
+		}
 
     }
 
@@ -48,15 +58,11 @@ public class Resetter : MonoBehaviour {
 	}
 
 	void HomeOnClick(){
-		//Debug.Log ("HomeOnClick!");
-		//home
-		Application.Quit ();
-
-		//ResetFlag = true;
-
-		//Time.timeScale = 1;
-		//gameOverWindow.SetActive (false);
-		//ResetWindowOpen = false;
+		HomePageManager.backHome = true;
+		Time.timeScale = 1;
+		ScoreManager.step = 1;
+		isPlaying = false;
+		ResetWindowOpen = false;
 	}
 
 
