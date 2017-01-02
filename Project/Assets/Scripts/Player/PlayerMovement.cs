@@ -52,7 +52,7 @@ public class PlayerMovement : MonoBehaviour
 
 		if (playerRigidbody.transform.position.y < 0 && isPlaying == false) {
 			loseAudio.Play ();
-			Debug.Log ("play");
+			//Debug.Log ("play");
 			isPlaying = true;
 		}
 		else if (EnergyManagerScript.UpdateFlag == false && EnergyManagerScript.Done == true) {
@@ -249,7 +249,7 @@ public class PlayerMovement : MonoBehaviour
 
 	void RestartOnClick(){
 		//Debug.Log ("RestartOnClick!");
-		//Resetter.ResetFlag = true;
+		Resetter.ResetFlag = true;
 		SceneManager.LoadScene("Proj01");
 		ScoreManager.stepUpdate = true;
 		Time.timeScale = 1;

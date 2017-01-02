@@ -30,7 +30,7 @@ public class LevelManager : MonoBehaviour {
 
 	public Image[] stars = new Image[3];
 	public Image[] yStars = new Image[3];
-
+	public static int nowStar;
 
 	/*
 	// UI
@@ -45,7 +45,7 @@ public class LevelManager : MonoBehaviour {
 
 	void Start () {
 		player = GetComponent<Rigidbody> ();
-		SetLevel ();
+
 		lvWindow.SetActive (false);
 		Disabled ();
 		isPlaying = false;
@@ -53,10 +53,15 @@ public class LevelManager : MonoBehaviour {
 		restart.onClick.AddListener (RestartOnClick);
 		next.onClick.AddListener (NextOnClick);
 		home.onClick.AddListener (HomeOnClick);
+		nowStar = 0;
 	}
 	
 	void Update () {
 		
+		if (DifficultyManager.setLevelFlag == true) {
+			SetLevel ();
+			DifficultyManager.setLevelFlag = false;
+		}
 		if (PlayerMovement.LevelUpFlag == true) {
 
 			TextManager.text.text = "-";
@@ -75,16 +80,21 @@ public class LevelManager : MonoBehaviour {
 				foreach (Image img in yStars) {
 					img.enabled = true;
 				}
+				nowStar = 3;
+
 			} else if ((float)ScoreManager.step / ScoreManager.maxStep >= 0.3f) {
 				excellent.enabled = true;
 				yStars [0].enabled = true;
 				yStars [1].enabled = true;
+				nowStar = 2;
 
 			} else if ((float)ScoreManager.step / ScoreManager.maxStep >= 0.2f) {
 				great.enabled = true;
 				yStars [0].enabled = true;
+				nowStar = 1;
 			} else {
 				good.enabled = true;
+				nowStar = 0;
 			}
 
 			if (NowLevel == 3) {
@@ -116,7 +126,7 @@ public class LevelManager : MonoBehaviour {
 
 	void RestartOnClick(){
 		//Debug.Log ("RestartOnClick");
-		//Resetter.ResetFlag = true;
+		Resetter.ResetFlag = true;
 		ScoreManager.stepUpdate = true;
 		Time.timeScale = 1;
 		Disabled ();
@@ -132,6 +142,7 @@ public class LevelManager : MonoBehaviour {
 		HighScoreManager.lvStepsUpdate [NowLevel - 1] = true;
 		++NowLevel;
 		SetLevel ();
+		Resetter.ResetFlag = true;
 		SceneManager.LoadScene("Proj01");
 		ScoreManager.maxStep = (int)Mathf.Pow ((NowLevel + 3), 2) - NowLevel * 4;
 		ScoreManager.stepUpdate = true;

@@ -14,6 +14,7 @@ public class ScoreManager : MonoBehaviour {
 	void Awake ()
 	{
 		stepUpdate = false;
+		maxStep = (int)Mathf.Pow (LevelManager.NowLevel + 3, 2) - 4 * LevelManager.NowLevel;
 		step = maxStep;
 		text = GetComponent <Text> ();
 
@@ -22,6 +23,7 @@ public class ScoreManager : MonoBehaviour {
 	void Update () {
 
 		if (stepUpdate == true) {
+			maxStep = (int)Mathf.Pow (LevelManager.NowLevel + 3, 2) - 4 * LevelManager.NowLevel;
 			step = maxStep;
 		}
 		text.text = "" + step;

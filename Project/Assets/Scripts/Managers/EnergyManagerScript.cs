@@ -98,6 +98,9 @@ public class EnergyManagerScript : MonoBehaviour {
 					}
 				}
 				div = energy / maxEnergy;
+				if (div > 1.0f) {
+					div = 1;
+				}
 				bar.fillAmount = div * 0.5f;
 
 				/*most: 5 steps*/

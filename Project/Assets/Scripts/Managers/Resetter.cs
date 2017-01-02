@@ -12,10 +12,11 @@ public class Resetter : MonoBehaviour {
 	public Button home;
 	public GameObject gameOverWindow;
 	public static bool ResetWindowOpen = false;
-	//public static bool ResetFlag = false;
+	public static bool ResetFlag = false;
 
 
 	void Start () {
+		ResetFlag = false;
 		restart.onClick.AddListener (RestartOnClick);
 		home.onClick.AddListener (HomeOnClick);
 		gameOverWindow.SetActive (false);
@@ -39,7 +40,7 @@ public class Resetter : MonoBehaviour {
 
 	void RestartOnClick(){
 		//Debug.Log ("RestartOnClick!");
-		//ResetFlag = true;
+		ResetFlag = true;
 		SceneManager.LoadScene("Proj01");
 		ScoreManager.stepUpdate = true;
 		Time.timeScale = 1;
