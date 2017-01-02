@@ -16,7 +16,7 @@ public class HighScoreManager : MonoBehaviour {
 
 	void Start () {
 		//use with caution
-		PlayerPrefs.DeleteAll ();
+		//PlayerPrefs.DeleteAll ();
 		text = GetComponent <Text> ();
 
 		for (int i = 0; i < 3; i++) {
