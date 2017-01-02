@@ -18,14 +18,24 @@ public class HomePageManager : MonoBehaviour {
 
 	public Rigidbody ballRigidbody;
 	public Button ball;
+
+	public GameObject playObj;
+	public GameObject tutorObj;
+	public GameObject leaveObj;
+
 	public Button play;
 	public Button tutor;
+	public Button leave;
 	public Image black;
 	Color c;
 	float startTime = -1;
 	int ctr = 0;
 
 	void Start () {
+		playObj.SetActive (false);
+		tutorObj.SetActive (false);
+		leaveObj.SetActive (false);
+
 		diffFlag = false;
 		backHome = false;
 		HomeWindowOpen = false;
@@ -36,6 +46,7 @@ public class HomePageManager : MonoBehaviour {
 		ball.onClick.AddListener (BallOnClick);
 		play.onClick.AddListener (PlayOnClick);
 		tutor.onClick.AddListener (TutorOnClick);
+		leave.onClick.AddListener (LeaveOnClick);
 
 		c = black.color;
 		c.a = 1;
@@ -50,11 +61,14 @@ public class HomePageManager : MonoBehaviour {
 		} else {
 			black.enabled = false;
 		}
-		if (startTime != -1) {
-			if (Time.time - startTime <= 3.0f)
-				ctr++;
-			else
-				ctr = 0;
+		if (ctr >= 2) {
+			playObj.SetActive (true);
+		}
+		if (ctr >= 5) {
+			tutorObj.SetActive (true);
+		}
+		if (ctr >= 10) {
+			leaveObj.SetActive (true);
 		}
 		if (backHome == true) {
 			homeWindow.SetActive (true);
@@ -67,8 +81,14 @@ public class HomePageManager : MonoBehaviour {
 		ballSound.Play ();
 		if (startTime == -1) {
 			startTime = Time.time;
-		} else if (ctr >= 5) {
-			
+		} else {
+			//print (ctr);
+			if (Time.time - startTime <= 3.0f)
+				ctr++;
+			else {
+				ctr = 0;
+				startTime = Time.time;
+			}
 		}
 	}
 
@@ -86,5 +106,8 @@ public class HomePageManager : MonoBehaviour {
 		HomeWindowOpen = false;
 		//print ("home2:" + HomeWindowOpen);
 
+	}
+	void LeaveOnClick(){
+		Application.Quit ();
 	}
 }

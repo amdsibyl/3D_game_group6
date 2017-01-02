@@ -202,7 +202,7 @@ public class PlayerMovement : MonoBehaviour
 			nowDirection = 0;
 			CollisionFlag = true;
 		} else if (collision.gameObject.tag == "RED") {
-			Debug.Log ("Red");
+			//Debug.Log ("Red");
 			EnergyManagerScript.RedFlag = true;
 			mode = 2;
 			CollisionFlag = true;

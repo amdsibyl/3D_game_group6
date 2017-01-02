@@ -68,12 +68,16 @@ public class EnergyManagerScript : MonoBehaviour {
 				&& Resetter.ResetWindowOpen == false && DifficultyManager.DiffWindowOpen == false) {
 
 				text.enabled = true;
-				if ((Time.time - startTime) == 2.0f) {
-					text.text = "2";
-				}
-				else if((Time.time - startTime) == 1.0f){
+				if ((Time.time - startTime) >= 2.0f) {
+					//print (Time.time - startTime);
 					text.text = "1";
-				}
+				} 
+				else if((Time.time - startTime) >= 1.0f){
+					//print (Time.time - startTime);
+					text.text = "2";
+				} 
+
+
 				/*For Computer*/
 				if (Input.GetMouseButtonDown (0) && MouseClick == false) {
 					//print (Input.mousePosition);
@@ -115,7 +119,7 @@ public class EnergyManagerScript : MonoBehaviour {
 
 				/*most: 5 steps*/
 				for (int i = 1; i < 10; i++) {
-					if (div < 0.2 * i)
+					if (div < 0.2 * (1+i))
 						break;
 					else if (nowBlock == i) {
 						nowBlock++;

@@ -88,7 +88,7 @@ public class LevelManager : MonoBehaviour {
 				good.enabled = true;
 				nowStar = 0;
 			}
-			print ("nowStar:::"+nowStar);
+			//print ("nowStar:::"+nowStar);
 
 			if (NowLevel == 3) {
 				//what should we do?
@@ -133,8 +133,12 @@ public class LevelManager : MonoBehaviour {
 	void NextOnClick(){
 		//Debug.Log ("NextOnClick");
 		HighScoreManager.lvStepsUpdate [NowLevel - 1] = true;
-		++NowLevel;
-		SetLevel ();
+		if (NowLevel < 3) {
+			++NowLevel;
+			SetLevel ();
+		} else {
+			//?
+		}
 		Resetter.ResetFlag = true;
 		SceneManager.LoadScene("Proj01");
 		ScoreManager.maxStep = (int)Mathf.Pow ((NowLevel + 3), 2) - NowLevel * 4;
