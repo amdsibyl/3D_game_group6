@@ -146,6 +146,7 @@ public class LevelManager : MonoBehaviour {
 			SceneManager.LoadScene("Proj01");
 		} else {
 			gameComplete.SetActive (true);
+			//LvupWindowOpen = false;
 		}
 		Resetter.ResetFlag = true;
 		ScoreManager.maxStep = (int)Mathf.Pow ((NowLevel + 3), 2) - NowLevel * 4;
@@ -154,7 +155,6 @@ public class LevelManager : MonoBehaviour {
 		Time.timeScale = 1;
 		Disabled ();
 		winAudio.Stop ();
-		LvupWindowOpen = false;
 	}
 
 	void HomeOnClick(){

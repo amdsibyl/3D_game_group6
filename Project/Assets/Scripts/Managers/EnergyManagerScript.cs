@@ -181,15 +181,17 @@ public class EnergyManagerScript : MonoBehaviour {
 						if (Input.mousePosition.x < (35* Screen.width/199)  && (Screen.height - Input.mousePosition.y) < (35* Screen.height/319) ) {
 							//pause button
 						} else {
-
-							if (isPlaying == false) {
-								pressAudio.Play ();
-								isPlaying = true;
+							if (unPressed) {
+								unPressed = false; 
+								pressPanel.SetActive (false);
+							} else {
+								if (isPlaying == false) {
+									pressAudio.Play ();
+									isPlaying = true;
+								}
+								Reset ();
+								UpdateFlag = true;
 							}
-							pressPanel.SetActive(false);
-							Reset ();
-							UpdateFlag = true;
-
 						}
 					}
 					break;
