@@ -68,13 +68,13 @@ public class HomePageManager : MonoBehaviour {
 			black.enabled = false;
 		}
 		if (ctr >= 2) {
-			playObj.SetActive (true);
-		}
-		if (ctr >= 5) {
 			tutorObj.SetActive (true);
 		}
+		if (ctr >= 5) {
+			playObj.SetActive (true);
+		}
 		if (ctr >= 10) {
-			leaveObj.SetActive (true);
+			//leaveObj.SetActive (true);
 		}
 		if (backHome == true) {
 			homeWindow.SetActive (true);

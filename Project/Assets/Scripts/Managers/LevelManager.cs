@@ -22,7 +22,9 @@ public class LevelManager : MonoBehaviour {
 	public Button restart;
 	public Button next;
 	public Button home;
+	public Button endHome;
 	public GameObject lvWindow;
+	public GameObject gameComplete;
 
 	public Image perfect;
 	public Image excellent;
@@ -46,6 +48,7 @@ public class LevelManager : MonoBehaviour {
 		restart.onClick.AddListener (RestartOnClick);
 		next.onClick.AddListener (NextOnClick);
 		home.onClick.AddListener (HomeOnClick);
+		endHome.onClick.AddListener (HomeOnClick);
 		nowStar = 0;
 	}
 	
@@ -93,7 +96,6 @@ public class LevelManager : MonoBehaviour {
 
 			if (NowLevel == 3) {
 				//what should we do?
-				
 			}
 
 			isPlaying = false;
@@ -141,11 +143,11 @@ public class LevelManager : MonoBehaviour {
 		if (NowLevel < 3) {
 			++NowLevel;
 			SetLevel ();
+			SceneManager.LoadScene("Proj01");
 		} else {
-			//?
+			gameComplete.SetActive (true);
 		}
 		Resetter.ResetFlag = true;
-		SceneManager.LoadScene("Proj01");
 		ScoreManager.maxStep = (int)Mathf.Pow ((NowLevel + 3), 2) - NowLevel * 4;
 		ScoreManager.stepUpdate = true;
 
@@ -163,6 +165,7 @@ public class LevelManager : MonoBehaviour {
 		winAudio.Stop ();
 		//SceneManager.LoadScene ("Proj01");
 		LvupWindowOpen = false;
+		gameComplete.SetActive (false);
 	}
 
 	void Disabled(){
