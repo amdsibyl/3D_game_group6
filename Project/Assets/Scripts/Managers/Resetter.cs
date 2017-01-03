@@ -13,6 +13,7 @@ public class Resetter : MonoBehaviour {
 	public Button restart;
 	public Button home;
 	public GameObject gameOverWindow;
+	public GameObject pauseButton;
 	public static bool ResetWindowOpen = false;
 	public static bool ResetFlag = false;
 	bool isPlaying = false;
@@ -33,6 +34,7 @@ public class Resetter : MonoBehaviour {
 			if (isPlaying == false) {
 				loseAudio.Play ();
 				gameOverWindow.SetActive (true);
+				pauseButton.SetActive (false);
 				ResetWindowOpen = true;
 				isPlaying = true;
 			}
@@ -44,12 +46,14 @@ public class Resetter : MonoBehaviour {
 		if (other.GetComponent<Rigidbody> () == rigidbody) {
 			gameOverWindow.SetActive (true);
 			ResetWindowOpen = true;
+			pauseButton.SetActive (false);
 		}
 
     }
 
 	void RestartOnClick(){
 		//Debug.Log ("RestartOnClick!");
+		pauseButton.SetActive (true);
 		ResetFlag = true;
 		SceneManager.LoadScene("Proj01");
 		ScoreManager.stepUpdate = true;

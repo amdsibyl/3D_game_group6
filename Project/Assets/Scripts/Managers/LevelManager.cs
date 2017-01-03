@@ -10,6 +10,7 @@ public class LevelManager : MonoBehaviour {
 	Rigidbody player;
 	public static int NowLevel = 1;
 	public GameObject[] Level;
+	public GameObject pauseButton;
 	public Vector3[] startCoordinate;
 	/* LEVEL1:(3,5,2)
 	 * LEVEL2:(5,5,2)
@@ -97,6 +98,8 @@ public class LevelManager : MonoBehaviour {
 
 			isPlaying = false;
 			PlayerMovement.LevelUpFlag = false;
+			//////////////////
+			pauseButton.SetActive (false);
 
 		}
 
@@ -119,6 +122,7 @@ public class LevelManager : MonoBehaviour {
 
 	void RestartOnClick(){
 		//Debug.Log ("RestartOnClick");
+		pauseButton.SetActive (true);
 		Resetter.ResetFlag = true;
 		ScoreManager.stepUpdate = true;
 		Time.timeScale = 1;
@@ -132,6 +136,7 @@ public class LevelManager : MonoBehaviour {
 
 	void NextOnClick(){
 		//Debug.Log ("NextOnClick");
+		pauseButton.SetActive (true);
 		HighScoreManager.lvStepsUpdate [NowLevel - 1] = true;
 		if (NowLevel < 3) {
 			++NowLevel;
