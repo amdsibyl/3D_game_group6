@@ -9,6 +9,7 @@ public class Resetter : MonoBehaviour {
     public float resetSpeed = 0.025f;
 
 	public AudioSource loseAudio;
+	public AudioSource clickSound;
 
 	public Button restart;
 	public Button home;
@@ -52,6 +53,7 @@ public class Resetter : MonoBehaviour {
     }
 
 	void RestartOnClick(){
+		clickSound.Play ();
 		//Debug.Log ("RestartOnClick!");
 		pauseButton.SetActive (true);
 		ResetFlag = true;
@@ -62,6 +64,7 @@ public class Resetter : MonoBehaviour {
 	}
 
 	void HomeOnClick(){
+		clickSound.Play ();
 		HomePageManager.backHome = true;
 		Time.timeScale = 1;
 		ScoreManager.step = 1;

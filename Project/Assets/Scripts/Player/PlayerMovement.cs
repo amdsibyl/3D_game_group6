@@ -17,6 +17,7 @@ public class PlayerMovement : MonoBehaviour
 	bool CollisionFlag = false;
 
 	public AudioSource loseAudio;
+	public AudioSource clickSound;
 
 	Vector3 movement;
 	Rigidbody playerRigidbody;
@@ -34,6 +35,8 @@ public class PlayerMovement : MonoBehaviour
 	public static bool LevelUpFlag = false;
 	public static bool isOnFloor = false;
 	bool isPlaying = false;
+
+	float delayTime;
 
 	void Awake(){
 		playerRigidbody = GetComponent<Rigidbody> ();
@@ -88,11 +91,6 @@ public class PlayerMovement : MonoBehaviour
 					break;
 				}
 				Handheld.Vibrate();
-				if (CollisionFlag == true) {
-					mode = 1;
-					CollisionFlag = false;
-				}
-
 			} 
 			else if (mode == 1) {
 				//Debug.Log ("mode1:"+data);
@@ -158,12 +156,13 @@ public class PlayerMovement : MonoBehaviour
 
 				}
 
-				if (CollisionFlag == true) {
-					mode = 1;
-					CollisionFlag = false;
-				}
 
 			}//end of mode 2
+
+			if (CollisionFlag == true) {
+				mode = 1;
+				CollisionFlag = false;
+			}
 
 			EnergyManagerScript.Done = false;
 		}
@@ -233,7 +232,8 @@ public class PlayerMovement : MonoBehaviour
 	}
 
 	void PauseOnClick(){
-		//Debug.Log ("pause!");
+		Debug.Log ("pause!");
+		clickSound.Play ();
 		pauseButton.SetActive (false);
 		Time.timeScale = 0;
 		quitWindow.SetActive (true);
@@ -242,6 +242,7 @@ public class PlayerMovement : MonoBehaviour
 
 	void CancelOnClick(){
 		//Debug.Log ("CancelOnClick!");
+		clickSound.Play ();
 		pauseButton.SetActive (true);
 		quitWindow.SetActive (false);
 		QuitWindowOpen = false;
@@ -250,6 +251,7 @@ public class PlayerMovement : MonoBehaviour
 
 	void RestartOnClick(){
 		//Debug.Log ("RestartOnClick!");
+		clickSound.Play ();
 		Resetter.ResetFlag = true;
 		SceneManager.LoadScene("Proj01");
 		ScoreManager.stepUpdate = true;
@@ -259,6 +261,7 @@ public class PlayerMovement : MonoBehaviour
 	}
 
 	void HomeOnClick(){
+		clickSound.Play ();
 		HomePageManager.backHome = true;
 		Time.timeScale = 1;
 		//SceneManager.LoadScene ("Proj01");

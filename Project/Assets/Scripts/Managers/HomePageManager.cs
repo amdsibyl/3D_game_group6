@@ -117,12 +117,14 @@ public class HomePageManager : MonoBehaviour {
 
 	void CancelOnClick(){
 		//Debug.Log ("CancelOnClick!");
+		clickSound.Play ();
 		HomeWindowOpen = true;
 		TutorPage.SetActive (false);
 		Cancel.SetActive (false);
 	}
 
 	void LeaveOnClick(){
+		clickSound.Play ();
 		Application.Quit ();
 	}
 }

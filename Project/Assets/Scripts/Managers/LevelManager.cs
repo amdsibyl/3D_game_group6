@@ -16,6 +16,7 @@ public class LevelManager : MonoBehaviour {
 	 * LEVEL2:(5,5,2)
 	 * LEVEL3:(1,5,0) */
 
+	public AudioSource clickSound;
 	public AudioSource winAudio;
 	bool isPlaying = false;
 
@@ -124,6 +125,7 @@ public class LevelManager : MonoBehaviour {
 
 	void RestartOnClick(){
 		//Debug.Log ("RestartOnClick");
+		clickSound.Play ();
 		pauseButton.SetActive (true);
 		Resetter.ResetFlag = true;
 		ScoreManager.stepUpdate = true;
@@ -138,15 +140,16 @@ public class LevelManager : MonoBehaviour {
 
 	void NextOnClick(){
 		//Debug.Log ("NextOnClick");
+		clickSound.Play ();
 		pauseButton.SetActive (true);
 		HighScoreManager.lvStepsUpdate [NowLevel - 1] = true;
 		if (NowLevel < 3) {
 			++NowLevel;
 			SetLevel ();
 			SceneManager.LoadScene("Proj01");
+			LvupWindowOpen = false;
 		} else {
 			gameComplete.SetActive (true);
-			//LvupWindowOpen = false;
 		}
 		Resetter.ResetFlag = true;
 		ScoreManager.maxStep = (int)Mathf.Pow ((NowLevel + 3), 2) - NowLevel * 4;
@@ -158,6 +161,7 @@ public class LevelManager : MonoBehaviour {
 	}
 
 	void HomeOnClick(){
+		clickSound.Play ();
 		HomePageManager.backHome = true;
 		HighScoreManager.lvStepsUpdate [NowLevel - 1] = true;
 		Time.timeScale = 1;

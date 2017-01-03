@@ -29,6 +29,7 @@ public class EnergyManagerScript : MonoBehaviour {
 	float div;
 	int nowBlock;
 	float energyUnit = 0.2f;
+	float flagTime = -1;
 
 
 	void Start () {
@@ -38,6 +39,7 @@ public class EnergyManagerScript : MonoBehaviour {
 		bar.fillAmount = 0f;
 		MouseClick = false;
 		isTouch = false;
+		//unPressed = true;
 		//print(Screen.width+","+Screen.height);
 		//print("#"+(35* Screen.width/199)+","+(35* Screen.height/319));
 	}
@@ -80,6 +82,7 @@ public class EnergyManagerScript : MonoBehaviour {
 
 
 				/*For Computer*/
+				/*
 				if (Input.GetMouseButtonDown (0) && MouseClick == false) {
 					//print (Input.mousePosition);
 					energy += energyUnit;
@@ -87,6 +90,7 @@ public class EnergyManagerScript : MonoBehaviour {
 				} else if (Input.GetMouseButtonUp (0)) {
 					MouseClick = false;
 				}
+				*/
 
 				/*For Mobile*/
 				if (Input.touchCount > 0) {
@@ -140,8 +144,9 @@ public class EnergyManagerScript : MonoBehaviour {
 				
 		}//end of redFlag
 		else {
-
+			
 			/*For Computer*/
+			/*
 			if (Input.GetMouseButtonDown (0) && PlayerMovement.isOnFloor == true  && HomePageManager.HomeWindowOpen == false
 				&& PlayerMovement.QuitWindowOpen == false && LevelManager.LvupWindowOpen == false 
 				&& Resetter.ResetWindowOpen == false && DifficultyManager.DiffWindowOpen == false) {
@@ -152,8 +157,8 @@ public class EnergyManagerScript : MonoBehaviour {
 					//pause button
 				} else {
 					if (unPressed) {
-						unPressed = false; 
-						pressPanel.SetActive (false);
+						//unPressed = false; 
+						//pressPanel.SetActive (false);
 					}else {
 						if (isPlaying == false) {
 							pressAudio.Play ();
@@ -166,6 +171,7 @@ public class EnergyManagerScript : MonoBehaviour {
 			} else if (Input.GetMouseButtonUp (0)) {
 				UpdateFlag = false;
 			} 
+			*/
 
 			/*For Mobile*/
 			if (Input.touchCount > 0) {
@@ -182,8 +188,9 @@ public class EnergyManagerScript : MonoBehaviour {
 							//pause button
 						} else {
 							if (unPressed) {
-								unPressed = false; 
+								Debug.Log (unPressed);
 								pressPanel.SetActive (false);
+								unPressed = false; 
 							} else {
 								if (isPlaying == false) {
 									pressAudio.Play ();
