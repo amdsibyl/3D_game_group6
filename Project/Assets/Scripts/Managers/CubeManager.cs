@@ -1,11 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class CubeManager : MonoBehaviour {
 	public ParticleSystem particlesystem;
 	void Start () {
-		
 	}
 
 	void Update () {
@@ -17,9 +17,7 @@ public class CubeManager : MonoBehaviour {
 		if (collision.gameObject.tag == "Player")
 		{
 			particlesystem.Play ();
-		}
+				}
 
 	}
-
-
 }

@@ -22,7 +22,7 @@ public class EnergyManagerScript : MonoBehaviour {
 	bool RedFirst = true;
 	bool MouseClick = false;
 	bool isTouch = false;
-	bool isPlaying = false;
+	public static bool isPlaying = false;
 
 	float startTime;
 	float div;
