@@ -5,6 +5,7 @@ using UnityEngine;
 public class EndCubeManager : MonoBehaviour {
 	
 	public ParticleSystem particleSystem;
+
 	// Use this for initialization
 	void Start () {
 		
@@ -16,6 +17,7 @@ public class EndCubeManager : MonoBehaviour {
 	}
 	void OnCollisionEnter(Collision collision){
 		particleSystem.Play ();
+
 
 	}
 }

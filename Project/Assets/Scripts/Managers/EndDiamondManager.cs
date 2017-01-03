@@ -5,6 +5,7 @@ using UnityEngine;
 public class EndDiamondManager : MonoBehaviour {
 	public GameObject Diamond;
 	public ParticleSystem ps;
+	public AudioSource breakingSound;
 	// Use this for initialization
 	void Start () {
 	//	Diamond.SetActive (true);
@@ -17,6 +18,7 @@ public class EndDiamondManager : MonoBehaviour {
 
 	void OnCollisionEnter(Collision collision){
 		ps.Play ();
+		breakingSound.Play ();
 		Diamond.SetActive (false);
 
 	}
