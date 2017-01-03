@@ -22,10 +22,13 @@ public class HomePageManager : MonoBehaviour {
 	public GameObject playObj;
 	public GameObject tutorObj;
 	public GameObject leaveObj;
+	public GameObject TutorPage;
+	public GameObject Cancel;
 
 	public Button play;
 	public Button tutor;
 	public Button leave;
+	public Button cancel;
 	public Image black;
 	Color c;
 	float startTime = -1;
@@ -35,6 +38,8 @@ public class HomePageManager : MonoBehaviour {
 		playObj.SetActive (false);
 		tutorObj.SetActive (false);
 		leaveObj.SetActive (false);
+		TutorPage.SetActive (false);
+		Cancel.SetActive (false);
 
 		diffFlag = false;
 		backHome = false;
@@ -47,6 +52,7 @@ public class HomePageManager : MonoBehaviour {
 		play.onClick.AddListener (PlayOnClick);
 		tutor.onClick.AddListener (TutorOnClick);
 		leave.onClick.AddListener (LeaveOnClick);
+		cancel.onClick.AddListener (CancelOnClick);
 
 		c = black.color;
 		c.a = 1;
@@ -105,8 +111,17 @@ public class HomePageManager : MonoBehaviour {
 		clickSound.Play ();
 		HomeWindowOpen = false;
 		//print ("home2:" + HomeWindowOpen);
-
+		TutorPage.SetActive (true);
+		Cancel.SetActive (true);
 	}
+
+	void CancelOnClick(){
+		//Debug.Log ("CancelOnClick!");
+		HomeWindowOpen = true;
+		TutorPage.SetActive (false);
+		Cancel.SetActive (false);
+	}
+
 	void LeaveOnClick(){
 		Application.Quit ();
 	}

@@ -27,7 +27,7 @@ public class EnergyManagerScript : MonoBehaviour {
 	float startTime;
 	float div;
 	int nowBlock;
-	float energyUnit = 0.3f;
+	float energyUnit = 0.2f;
 
 
 	void Start () {

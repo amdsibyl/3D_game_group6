@@ -28,6 +28,7 @@ public class PlayerMovement : MonoBehaviour
 	public Button restart;
 	public Button home;
 	public GameObject quitWindow;
+	public GameObject pauseButton;
 	public static bool QuitWindowOpen = false;
 
 	public static bool LevelUpFlag = false;
@@ -233,6 +234,7 @@ public class PlayerMovement : MonoBehaviour
 
 	void PauseOnClick(){
 		//Debug.Log ("pause!");
+		pauseButton.SetActive (false);
 		Time.timeScale = 0;
 		quitWindow.SetActive (true);
 		QuitWindowOpen = true;
@@ -240,6 +242,7 @@ public class PlayerMovement : MonoBehaviour
 
 	void CancelOnClick(){
 		//Debug.Log ("CancelOnClick!");
+		pauseButton.SetActive (true);
 		quitWindow.SetActive (false);
 		QuitWindowOpen = false;
 		Time.timeScale = 1;
@@ -252,6 +255,7 @@ public class PlayerMovement : MonoBehaviour
 		ScoreManager.stepUpdate = true;
 		Time.timeScale = 1;
 		QuitWindowOpen = false;
+		Resetter.ResetWindowOpen = false;
 	}
 
 	void HomeOnClick(){
